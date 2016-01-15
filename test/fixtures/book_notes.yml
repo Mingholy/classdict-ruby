@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  book_id: 
+  user_id: 
+  page: 1
+  page_image: MyString
+  type: 1
+  content: MyText
+  pro: 1
+  con: 1
+
+two:
+  title: MyString
+  book_id: 
+  user_id: 
+  page: 1
+  page_image: MyString
+  type: 1
+  content: MyText
+  pro: 1
+  con: 1

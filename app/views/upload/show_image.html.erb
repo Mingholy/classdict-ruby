@@ -1,0 +1,9 @@
+<h3><%= @picture.comment %></h3>
+<img id="cover" src="<%= url_for action: :picture, id: @picture.id %>" style="height:300px;">
+<%= javascript_tag do %>
+	var c = $("img").attr("src");
+	$(document).ready(function(){
+		$("#book-cover",window.parent.document).val(c);
+		$("#course-cover",window.parent.document).val(c);
+	});
+<%end%>

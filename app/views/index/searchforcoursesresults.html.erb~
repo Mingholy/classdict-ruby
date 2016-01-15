@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Class Dict 课堂推书</title>
+    <!-- Class Dict Customize-->
+    <%= stylesheet_link_tag 'usermain' %>
+    <%= stylesheet_link_tag 'results.css' %>
+    <%= javascript_tag do %>
+
+        function search_books(){
+        var keywords = document.getElementById("searchInput").value;
+        if (keywords == "" || keywords.length == 0)
+        keywords = '*';
+        self.location.href = '/search/'+keywords + '/1';
+        }
+        function search_courses(){
+        var keywords = document.getElementById("searchInput").value;
+        if (keywords == "" || keywords.length == 0)
+        keywords = '*';
+        self.location.href = '/search_course/'+keywords + '/1';
+        }
+
+    <% end %>
+  </head>
+  <body>
+		<!-- Topside navigation bar goes here-->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="<%= root_path %>">Class Dict 课堂推书</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="<%= logout_path %>">注销</a></li>
+            <li><a href="/:user/:id/profile">设置</a></li>
+            <li><a href="/:user/:id/messages">消息<span class="badge">14</span></a></li>
+          </ul>
+          <form class="navbar-form navbar-left">
+            <input type="text" id="searchInput" class="form-control" placeholder="搜索课程或者书籍..." value="<%= params[:keywords] %>">
+						<div class="btn-group" role="group">
+              <button type="button" class="btn btn-default" onclick="search_books()"><span class="glyphicon glyphicon-book" aria-hidden="true">书籍</span></button>
+              <button type="button" class="btn btn-default" onclick="search_courses()"><span class="glyphicon glyphicon-bell" aria-hidden="true">课程</span></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </nav>
+		<!-- Main content container goes here-->
+		<div class="container-fluid">
+	  <div class="row">
+			<!-- Left sidebar : user menu -->
+			<div class="col-sm-3 col-md-2 sidebar">
+				<ul class="nav nav-sidebar m_bt" style="text-align:center;">
+          <li><a href="<%= coursecollection_path %>">课程收藏<span class="sr-only">(current)</span></a></li>
+          <li><a href="<%= bookcollection_path %>">书籍收藏</a></li>
+          <li><a href="<%= newbook_path %>">申请新书</a></li>
+          <li><a href="<%= newcourse_path %>">申请课程</a></li>
+        </ul>
+			</div>
+			<!-- Middle columns : search results; course details; book details -->
+			<div class="col-sm-9 col-md-10 main col-sm-offset-3 col-md-offset-2 main">
+				<div class="container-fluid">
+					<div class="results-container">
+            <div class="results-content">
+              <table class="table results">
+                <% @courses.each do |course| %>
+                <tbody class="c-result">
+                  <tr class="c-title">
+                    <td rowspan="2" class="c-thumb">
+                      <% if course.picture_id.nil? %>
+                          <% course.picture_id = 1 %>
+                      <% end %>
+                      <img id="tq-q1-img" data-src="holder.js/200x200" class="img-thumbnail" alt="course name" src="<%= url_for controller: :upload ,action: :picture, id: course.picture_id %>" data-holder-rendered="true">
+                    </td>
+                    <td class="c-name">
+                      <a href="<%= coursedetail_path(course) %>"><%= course.title %></a>
+                    </td>
+                    <td class="c-teacher">
+                      <%= course.time %>
+                    </td>
+                  </tr>
+                  <tr class="c-abstract">
+                    <td colspan="2"> 
+                    <p1>课程简介:</p1>
+                    <p2><%= course.description %></p2>
+                    </td>
+                  </tr>
+                </tbody>
+                <% end %>
+              </table>
+            </div>
+            <div class="page-control">
+              <nav>
+                <ul class="pagination pagination-lg">
+                  <li <% if @page == 1 %>class="disabled"<% end %>><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                  <% for i in 1..@page_count %>
+                      <li <% if @page == i %>class="active"<% end %>>
+                        <% if @keywords.nil? or @keywords.length == 0 %>
+                            <% @keywords = '*' %>
+                        <% end %>
+                        <%= link_to i , coursesearch_path(keywords: @keywords,page: i)  %></li>
+                  <% end %>
+                  <li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                </ul>
+              </nav>
+            </div>
+					</div>
+				</div>
+			</div>
+			<!-- Right sidebar : ranking lists -->
+	</div>
+      </div>
+  </body>
+</html>

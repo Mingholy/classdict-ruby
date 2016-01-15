@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Class Dict 课堂推书</title>
+    <!-- Bootstrap Addons -->
+    <%= stylesheet_link_tag 'bootstrap-datepicker3.css' %>
+    <%= stylesheet_link_tag 'fileinput.min.css' %>
+    <!-- Class Dict Customize-->
+    <%= stylesheet_link_tag 'usermain.css' %>
+  </head>
+  <body>
+		<!-- Topside navigation bar goes here-->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="<%= root_path %>">Class Dict 课堂推书</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="<%= logout_path %>">注销</a></li>
+            <li><a href="<%= index_usercenter_path %>">用户中心</a></li>
+            <li><a href="/:user/:id/messages">消息<span class="badge">14</span></a></li>
+          </ul>
+          <form class="navbar-form navbar-left">
+            <input type="text" id="searchInput" class="form-control" placeholder="搜索课程或者书籍..." value="<%= params[:keywords] %>">
+						<div class="btn-group" role="group">
+              <button type="button" class="btn btn-default" onclick="search_books()"><span class="glyphicon glyphicon-book" aria-hidden="true">书籍</span></button>
+              <button type="button" class="btn btn-default" onclick="search_courses()"><span class="glyphicon glyphicon-bell" aria-hidden="true">课程</span></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </nav>
+		<!-- Main content container goes here-->
+		<div class="container-fluid">
+	  <div class="row">
+			<!-- Left sidebar : user menu -->
+			<div class="col-sm-3 col-md-2 sidebar">
+				<ul class="nav nav-sidebar m_bt" style="text-align:center;">
+          <li><a href="<%= coursecollection_path %>">课程收藏<span class="sr-only">(current)</span></a></li>
+          <li><a href="<%= bookcollection_path %>">书籍收藏</a></li>
+          <li><a href="<%= newbook_path %>">申请新书</a></li>
+          <li><a href="<%= newcourse_path %>">申请课程</a></li>
+        </ul>
+			</div>
+			<!-- Middle columns : search results; course details; book details -->
+			<div class="col-sm-9 col-md-10 main col-sm-offset-3 col-md-offset-2 main">
+				<div class="container row">
+<h2>申请添加新的书籍</h2>
+<hr>
+					<div class="newbook col-sm-6">
+              <%= form_for :book , html: {id: "newbook-form",ENCTYPE:"multipart/form-data"},url:{controller: :books, action: :create_newbook} do |f|  %>
+              <div class="form-group">
+		<%= f.hidden_field :picture_id , id:"book-cover", class: "form-control", placeholder: "" %>
+                <label for="book-title">书籍题名</label>
+                <%= f.text_field :title , class: "form-control", placeholder: "书籍题名" %>
+                <label for="book-author">著者</label>
+                <%= f.text_field :author , class: "form-control", placeholder: "著者" %>
+                <label for="book-publish-time">出版日期</label>
+                <%= f.text_field :time , class: "form-control datepicker", id:"book-time", placeholder: "出版日期" %>
+                <label for="book-title">书籍版别</label>
+                <%= f.text_field :version , class: "form-control", placeholder: "书籍版别" %>
+                <label for="book-course">对应课程</label>
+                <%= f.text_field :courses , class: "form-control", placeholder: "对应课程, 多个课程请用半角逗号','隔开" %>
+                <label for="book-ref">可预览的文件路径</label>
+                <%= f.text_field :filepath , class: "form-control", placeholder: "可选; 在不存在版权问题的情况下可以提供.", type: "url" %>
+                <label for="book-difficulty">书籍难度</label>
+                 <%= f.text_field :difficulty , class: "form-control", placeholder: "书籍难度, 请填写0-5的整数.", type: "number" %>
+                <label for="book-intro">内容简介</label>
+                <%=f.text_area :description , row: 3, class: "form-control", placeholder:"内容简介"  %>
+              </div>
+                <%=f.submit '提交', class: "btn btn-lg" %>
+            <% end %>
+		</div>
+		<div class="container-fluid col-sm-6">
+		<label for="book-cover" style="position:absolute;">封面图片</label>
+		<iframe id="upload-image" src="/upload/get_image" style="height:300px;border:none;margin-top:25px;width:100%;" scrolling="no" onload="this.height = this.document.body.offsetHeight;this.width=this.document.body.offsetWidth;">
+		</iframe>
+		</div>
+	</div>
+	</div>
+			<!-- Right sidebar : ranking lists -->
+	</div>
+      <%= javascript_include_tag 'bootstrap-datepicker.min.js' %>
+      <%= javascript_include_tag 'fileinput.min.js' %>
+      <%= javascript_include_tag 'fileinput_locale_zh.js' %>
+      <%= javascript_tag do %>
+	
+        function search_books(){
+        var keywords = document.getElementById("searchInput").value;
+        if (keywords == "" || keywords.length == 0)
+        keywords = '*';
+        self.location.href = '/search/'+keywords + '/1';
+        }
+        function search_courses(){
+        var keywords = document.getElementById("searchInput").value;
+        if (keywords == "" || keywords.length == 0)
+        keywords = '*';
+        self.location.href = '/search_course/'+keywords + '/1';
+        }
+        $(document).ready(function(){
+          $("#book-time").attr("data-provide","datepicker");
+        });
+      <% end %>
+      </div>
+  </body>
+</html>

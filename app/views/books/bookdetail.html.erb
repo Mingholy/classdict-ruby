@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Class Dict 课堂推书</title>
+    <!-- Class Dict Customize-->
+    <%= stylesheet_link_tag 'usermain.css' %>
+    <%= stylesheet_link_tag 'details.css' %>
+    <%= javascript_tag do %>
+
+        function search_books(){
+        var keywords = document.getElementById("searchInput").value;
+        if (keywords == "" || keywords.length == 0)
+        keywords = '*';
+        self.location.href = '/search/'+keywords + '/1';
+        }
+        function search_courses(){
+        var keywords = document.getElementById("searchInput").value;
+        if (keywords == "" || keywords.length == 0)
+        keywords = '*';
+        self.location.href = '/search_course/'+keywords + '/1';
+        }
+
+    <% end %>
+  </head>
+  <body>
+		<!-- Topside navigation bar goes here-->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="<%= root_path %>">Class Dict 课堂推书</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/logout">注销</a></li>
+            <li><a href="<%= index_usercenter_path %>">用户中心</a></li>
+            <li><a href="/:user/:id/messages">消息<span class="badge">14</span></a></li>
+          </ul>
+          <form class="navbar-form navbar-left">
+            <input type="text" id="searchInput" class="form-control" placeholder="搜索课程或者书籍...">
+						<div class="btn-group" role="group">
+							<button type="button" class="btn btn-default" onclick="search_books()"><span class="glyphicon glyphicon-book" aria-hidden="true">书籍</span></button>
+							<button type="button" class="btn btn-default" onclick="search_courses()"><span class="glyphicon glyphicon-bell" aria-hidden="true">课程</span></button>
+						</div>
+          </form>
+        </div>
+      </div>
+    </nav>
+		<!-- Main content container goes here-->
+		<div class="container-fluid">
+	  <div class="row">
+			<!-- Left sidebar : user menu -->
+			<div class="col-sm-3 col-md-2 sidebar">
+				<ul class="nav nav-sidebar m_bt" style="text-align:center;">
+          <li><a href="<%= coursecollection_path %>">课程收藏<span class="sr-only">(current)</span></a></li>
+          <li><a href="<%= bookcollection_path %>">书籍收藏</a></li>
+          <li><a href="<%= newbook_path %>">申请新书</a></li>
+          <li><a href="<%= newcourse_path %>">申请课程</a></li>
+        </ul>
+			</div>
+			<!-- Middle columns : search results; course details; book details -->
+			<div class="col-sm-9 col-md-10 main col-sm-offset-3 col-md-offset-2 main">
+				<div class="container">
+					<div>
+            <!-- Course information -->
+            <div class="course-information">
+            <!--  Book related to this course -->
+              <table class="table table-condensed">
+                <thead>
+                  <tr id="np">
+                    <td colspan="2"><h1><%= @book.title %></h1></td>
+                    <td colspan="2"><a href="" ><button id="np-b" class="btn btn-lg course-default" ><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>收藏</button></a></td>
+                  </tr>
+                </thead>
+                <tbody id="b-info">
+                  <tr>
+                    <td rowspan="6" style="width:250px">
+                      <% if @book.picture_id.nil? %>
+                          <% @book.picture_id = 0 %>
+                      <% end %>
+                      <img class="bd-thumb" data-src="holder.js/200x200" class="img-thumbnail" alt="course name" src="<%= url_for controller: :upload ,action: :picture, id: @book.picture_id %>" data-holder-rendered="true"></td>
+                    <td class="bd-attr">著者:</td>
+                    <td><%= @book.author %></td>
+                  </tr>
+                  <tr>
+                    <td class="bd-attr">版别:</td>
+                    <td>原书第<%= @book.version.to_i.to_s %>版</td>
+                  </tr>
+                  <tr>
+                    <td class="bd-attr">出版时间:</td>
+                    <td><%= @book.publish_time %></td>
+                  </tr>
+                  <tr>
+                    <td class="bd-attr">修改时间:</td>
+                    <td><%= @book.updated_at %></td>
+                  </tr>
+                  <tr>
+                    <td class="bd-attr">难度:</td>
+                    <td>
+                      <span>
+                        <% for i in 0...(@book.difficulty / 2) %>
+                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        <% end %>
+                        <% for i in 0...(5 - @book.difficulty/2) %>
+                          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                        <% end %>
+                        (<%= @book.difficulty %>/10)
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="bd-attr">读者评价:</td>
+                    <td>
+                      <span class="glyphicon glyphicon-thumbs-up plus1" aria-hidden="true"></span>
+                      <span class="badge" value><%= @book.pro %></span>
+                      <span class="glyphicon glyphicon-thumbs-down plus1" aria-hidden="true"></span>
+                      <span class="badge"><%= @book.con %></span>
+                    </td>
+                  </tr>
+                  <tr style="border-top:2px groove #428BCA;">
+                    <td colspan="3">内容简介:</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" id="b-intro">
+                    <% if @book.description.nil? or @book.description.length == 0 %>
+                      <% @book.description='还没有简介' %>
+                    <% end %>
+                    <%= @book.description.strip %>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="course-relation">
+              <!-- This table is for the information from table COURSE-BOOK! -->
+              <table class="table table-condensed">
+                <thead id="rb-title">
+                  <td colspan="4"><h2><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>本书籍的相关课程</h2></td>
+                </thead>
+                <tbody id="rb-list">
+                <% @course_related.each do |course| %>
+                  <tr>
+                    <td><a href="<%= coursedetail_path(course) %>"><%= course.title %></a></td>
+                    <td><%= course.school %></td>
+                    <td><%= course.time %></td>
+                    <td>共浏览<%= course.clicks.to_s %>次</td>
+                  </tr>
+                <% end %>
+                </tbody>
+                <tfoot id="rb-footer">
+                  <tr>
+                    <td colspan="6"><button type="button" class="btn btn-primary btn-default">显示更多</button></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- Forum -->
+            <div class="book-forum">
+              <table class="table table-condensed">
+                <thead id="bf-title">
+                  <tr>
+                    <td>
+                      <h2><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>书评与心得<span class="btn-group"><button type="button" class="btn btn-primary" new-type="new-comment">写短评</button><button type="button" class="btn btn-primary" new-type="new-note">写心得</button><button type="button" class="btn btn-primary" new-type="new-question">提问题</button></span></h2>
+                    </td>
+                  </tr>
+                </thead>
+              </table>
+              <div class="container-fluid">
+                <ul class="nav nav-tabs select" role="tablist">
+                  <li id="ct1" role="presentation" class="active" data-toggle="tab"><a href="#bf-comment" aria-controls="bf-comment" role="tab" data-toggle="tab">短评</a></li>
+                  <li id="ct2" role="presentation" data-toggle="tab"><a href="#bf-note" aria-controls="bf-note" role="tab" data-toggle="tab">心得</a></li>
+                  <li id="ct3" role="presentation" data-toggle="tab"><a href="#bf-question" aria-controls="bf-question" role="tab" data-toggle="tab">提问</a></li>
+                </ul>
+              <div class="tab-content">
+                <ul id="bf-comment" role="tabpanel" class="list-group tab-pane fade in active">
+                  <% if @reviews.length == 0 %>
+                      <li class= "list-group-item">
+                        <h4 class="list-group-item-heading">
+                        </h4>
+                        <p class="list-group-item-text">还没有人写短评呢，快抢沙发吧。</p>
+                      </li>
+                  <% end %>
+                  <% for i in 0...@reviews.length do %>
+                  <li class= "list-group-item">
+                    <h4 class="list-group-item-heading"><%= User.find(@reviews[i].user_id).nickname %><span class="p-c"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><span class="badge"><%= @reviews[i].pro %></span><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span><span class="badge"><%= @reviews[i].con %></span>
+                      </span>
+                    </h4>
+                    <p class="list-group-item-text"><%= @reviews[i].content %></p>
+                  </li>
+                  <% end %>
+                  <button type="button" class="btn btn-primary btn-default">显示更多</button>
+                </ul>
+
+                <ul id="bf-note" role="tabpanel" class="list-group tab-pane fade">
+                  <% if @articles.length == 0 %>
+                      <li class= "list-group-item">
+                        <h4 class="list-group-item-heading">
+                        </h4>
+                        <p class="list-group-item-text">还没有人写心得呢，快抢沙发吧。</p>
+                      </li>
+                  <% end %>
+                  <% @articles.each do |article| %>
+                  <li class= "list-group-item">
+                    <h4 class="list-group-item-heading">
+                      <a href="<%= book_topic_path(book_id: @book.id, note_id: article.id) %>"><%= article.title %></a>
+                      <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                      <span class="p-c">
+                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                        <span class="badge"><%= article.pro %></span>
+                        <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                        <span class="badge"><%= article.con %></span>
+                      </span>
+                    </h4>
+                    <time><%= article.updated_at %></time>
+                    <p class="list-group-item-text"><%= article.content.strip %></p>
+                  </li>
+                <% end %>
+                  <button type="button" class="btn btn-primary btn-default">显示更多</button>
+                </ul>
+                <ul id="bf-question" role="tabpanel" class="list-group tab-pane fade">
+                  <% if @questions.length == 0 %>
+                      <li class= "list-group-item">
+                        <h4 class="list-group-item-heading">
+                        </h4>
+                        <p class="list-group-item-text">还没有人提问呢，快抢沙发吧。</p>
+                      </li>
+                  <% end %>
+                  <% @questions.each do |question| %>
+                  <li class= "list-group-item">
+                    <h4 class="list-group-item-heading"><a href="<%= book_topic_path(book_id: @book.id, note_id: question.id) %>">[第<em><%= question.page.to_i %></em>页]<%= question.title.strip %></a></h4>
+                    <p class="list-group-item-text"><%= question.updated_at %> <%= question.content.strip %></p>
+                  </li>
+                  <% end %>
+                  <button type="button" class="btn btn-primary btn-default">显示更多</button>
+                </ul>
+              </div>
+              </div>
+            </div>
+					</div>
+				</div>
+			</div>
+    </div>
+    </div>
+    <!-- Modals: NEW Comment, Note, Question -->
+    <div id="new-comment" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="new-comment-label">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="new-comment-label">写短评</h4>
+					</div>
+					<%= form_tag '/write_review', name: "form-comment" do -%>
+						<div class="modal-body">
+							<span>写下你对本书简短的评论</span>
+							<hr>
+							<textarea type="text" id="content" name="content" class="form-control" placeholder="说点什么......" rows="5"></textarea>
+              <input name="book_id" id="book_id" type="hidden" value="<%= @book.id %>">
+						</div>
+						<div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button class="btn btn-primary" type="submit">发表</button>
+						</div>
+          <% end -%>
+				</div>
+			</div>
+		</div>
+    <div id="new-note" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="new-note-label">
+			<div class="modal-dialog" role="document">
+        <%= form_tag '/write_note', name: "form-comment" do -%>
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="new-note-label">写心得</h4>
+					</div>
+						<div class="modal-body">
+							<span>写下你的心得</span>
+							<hr>
+							<input type="text" id="title" name="title" class="form-control" placeholder="标题">
+              <input name="book_id" id="book_id" type="hidden" value="<%= @book.id %>">
+              <textarea  id="content" name="content" class="form-control" placeholder="心得内容......" rows="10"></textarea>
+						</div>
+						<div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button class="btn btn-primary" type="submit">发表</button>
+						</div>
+				</div>
+        <% end -%>
+			</div>
+		</div>
+    <div id="new-question" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="new-question-label">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="new-question-label">提问题</h4>
+					</div>
+          <%= form_tag '/write_question', name: "form-comment" do -%>
+						<div class="modal-body">
+							<input type="text" id="title" name="title" class="form-control" placeholder="问题">
+              <input type="number" id="page" name="page" class="form-control" placeholder="页码">
+              <input name="book_id" id="book_id" type="hidden" value="<%= @book.id %>">
+              <textarea type="text" id="content" name="content" class="form-control" placeholder="问题描述......" rows="10"></textarea>
+						</div>
+						<div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button class="btn btn-primary" type="submit">提问</button>
+						</div>
+          <% end -%>
+				</div>
+			</div>
+		</div>
+
+    <script type="text/javascript">
+      $("#np-b").click(function(){
+          $("#np-b").toggleClass("course-default course-liked")
+          return false;
+        });
+        $(".plus1").click(function(){
+          var i = parseInt($(this).next().text());
+          i++;
+          $(this).next().text(i);
+          $(".plus1").removeClass("plus1");
+        });
+       function search_books(){
+        var keywords = document.getElementById("searchInput").value;
+        if (keywords == "" || keywords.length == 0)
+        keywords = '*';
+        self.location.href = '/search/'+keywords + '/1';
+        }
+        function search_courses(){
+        var keywords = document.getElementById("searchInput").value;
+        if (keywords == "" || keywords.length == 0)
+        keywords = '*';
+        self.location.href = '/search_course/'+keywords + '/1';
+        }
+      $(document).ready(function(){
+        $(".glyphicon-triangle-bottom").click(function(){
+          $(this).parent().next().next().toggleClass("collapse");
+          $(this).toggleClass("glyphicon-triangle-bottom glyphicon-triangle-top");
+        });
+        $(".select a").click(function (e) {
+          e.preventDefault()
+          $(this).tab('show')
+        });
+        $("#bf-title button").click(function(){
+          var eid = $(this).attr("new-type");
+          $("#"+eid).modal();
+          $("body").css('padding-right','0px');
+        });
+      });
+    </script>
+  </body>
+</html>

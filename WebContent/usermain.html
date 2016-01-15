@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Class Dict 课堂推书</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<!-- Class Dict Customize-->
+	<link href="css/usermain.css" rel="stylesheet">
+  </head>
+  <body>
+		<!-- Topside navigation bar goes here-->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">Class Dict 课堂推书</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">注销</a></li>
+            <li><a href="#">设置</a></li>
+            <li><a href="#">消息<span class="badge">14</span></a></li>
+          </ul>
+          <form class="navbar-form navbar-left">
+            <input type="text" id="searchInput" class="form-control" placeholder="搜索课程或者书籍...">
+          </form>
+        </div>
+      </div>
+    </nav>
+		<!-- Main content container goes here-->
+		<div class="container-fluid">
+	  <div class="row">
+			<!-- placeholder :　I'm gonna add a collapse button here.-->
+			<!-- Left sidebar : user menu -->
+			<div class="col-sm-3 col-md-2 sidebar">
+				<ul class="nav nav-sidebar m_bt" style="text-align:center;">
+					<li class="active"><a href="#">课程收藏 <span class="sr-only">(current)</span></a></li>
+					<li><a href="#">书籍收藏</a></li>
+					<li><a href="#">申请新书</a></li>
+					<li><a href="#">申请课程</a></li>
+        </ul>
+			</div>
+			<!-- Middle columns : search results; course details; book details-->
+			<div class="col-sm-6 col-md-8 main col-sm-offset-3 col-md-offset-2 main">
+			待施工 这里是搜索结果\课程详情\书籍详情\评论详情的主要展示区域;
+			</div>
+			<!-- Right sidebar : ranking lists & comments-->
+			<div class="col-sm-3 col-md-2 sidebar-right">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<td colspan="2" class="ranking-title">热搜课程排行</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td><a href="#">数据挖掘</a></td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td><a href="#">网络数据挖掘</a></td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td><a href="#">人工智能导论</a></td>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td><a href="#">数理逻辑与程序理论</a></td>
+						</tr>
+						<tr>
+							<td>5</td>
+							<td><a href="#">形式语言与自动机</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<td colspan="2" class="ranking-title">热搜书籍排行</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td><a href="#">《数据挖掘》第x版 xxx 电子工业出版社</a></td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td><a href="#">《数据结构》第三版 严蔚敏 清华大学出版社</a></td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td><a href="#">《算法设计与分析》第三版 屈婉玲 清华大学版社</a></td>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td><a href="#">《Linux内核设计的艺术》第二版 杨力祥 机械工业出版社</a></td>
+						</tr>
+						<tr>
+							<td>5</td>
+							<td><a href="#">《算法导论》第三版 外国人 机械业出版社</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="list-group remark"><span class="ranking-title">最新评论</span>
+          <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">用户123</h4>
+            <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+          </a>
+          <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">用户456</h4>
+            <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+          </a>
+          <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">用户789</h4>
+            <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+          </a>
+        </div>
+			</div>
+		</div>
+	</div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../app/assets/javascripts/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,106 @@
+.b-title .img-thumbnail, .c-title .img-thumbnail{
+  width:200px;
+  height:200px;
+}
+p1{
+  color:#777;
+}
+p2{
+  font-size:1em;
+  color:#999;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+/* Style for courses */
+.c-result,.b-result{
+  height:230px;
+  border-top:15px solid #fff;
+  border-bottom:20px solid #fff;
+}
+.c-title,.b-title{
+  height:38.2%;
+  background-color:#428BCA;
+}
+.c-name,.b-name{
+  width:60%;
+}
+.c-teacher{
+  width:40%;
+  padding:5px 0 5px 0;
+  font-size:1.5em;
+  color:#fff;
+}
+.c-abstract{
+  height:61.8%;
+}
+.c-thumb{
+  min-width:216px;
+  width=15%;
+  height=200px;
+}
+.c-title td,.b-title td{
+  vertical-align:middle!important;
+}
+/* Style for books */
+.b-difficulty{
+  width:20%;
+  color:yellow;
+  letter-spacing:2px;
+  text-shadow:3px 3px 3px #555;
+}
+.b-edition{
+  width:20%;
+  color:#fff;
+  font-size:1.5em;
+}
+.b-info{
+  background-color:#FCF8E3;
+}
+.b-author,.b-publisher{
+  color:#777
+}
+.b-publisher{
+  float:right;
+  margin-right:20px;
+  font-weight:bold;
+}
+/* CSS link effects */
+.results .b-name a, .results .c-name a{
+  font-family:黑体;
+  font-size:2em;
+  font-weight: 900;
+	color: rgba(0,0,0,0.2);
+	font-weight: bolder;
+	text-shadow: none;
+  position: relative;
+  display: inline-block;
+  margin: 15px 25px;
+  outline: none;
+  color: #61e1ff;
+  text-decoration: none;
+  letter-spacing: 1px;
+  text-shadow: 0 0 1px rgba(255,255,255,0.3);
+}
+
+.results .b-name a::before, .results .c-name a::before{
+	color: #fff;
+	content: attr(data-hover);
+	position: absolute;
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	-moz-transition: -moz-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+}
+
+.results .b-name a:hover::before,
+.results .b-name a:focus::before,
+.results .c-name a:hover::before,
+.results .c-name a:focus::before{
+	-webkit-transform: scale(0.9);
+	-moz-transform: scale(0.9);
+	transform: scale(0.9);
+	opacity: 0;
+}

@@ -1,0 +1,22 @@
+#line{
+  margin-bottom:5px;
+}
+#thread-page-h ul{
+  margin:10px 0 0 0;
+}
+.panel-body input{
+  margin-bottom:10px
+}
+.nag-focus{
+  background:#f5f5f5;
+}
+.topic-link{
+  font-size:16px;
+  text-decoration:none;
+}
+.topic-link:hover{
+  font-size:16px;
+  text-decoration:none;
+  font-weight:bold;
+  color:#286090;
+}

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Class Dict 课堂推书</title>
+    <!-- Class Dict Customize-->
+    <%= stylesheet_link_tag 'usermain.css' %>
+    <%= stylesheet_link_tag 'details.css' %>
+  </head>
+  <body>
+		<!-- Topside navigation bar goes here-->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="<%= root_path %>">Class Dict 课堂推书</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/logout">注销</a></li>
+           <li><a href="index/usercenter">用户中心</a></li>
+            <li><a href="/:user/:id/messages">消息<span class="badge">14</span></a></li>
+          </ul>
+          <form class="navbar-form navbar-left">
+            <input type="text" id="searchInput" class="form-control" placeholder="搜索课程或者书籍..." value="<%= params[:keywords] %>">
+						<div class="btn-group" role="group">
+              <button type="button" class="btn btn-default" onclick="search_books()"><span class="glyphicon glyphicon-book" aria-hidden="true">书籍</span></button>
+              <button type="button" class="btn btn-default" onclick="search_courses()"><span class="glyphicon glyphicon-bell" aria-hidden="true">课程</span></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </nav>
+		<!-- Main content container goes here-->
+		<div class="container-fluid">
+	  <div class="row">
+			<!-- Left sidebar : user menu -->
+			<div class="col-sm-3 col-md-2 sidebar">
+				<ul class="nav nav-sidebar m_bt" style="text-align:center;">
+					<li><a href="<%= coursecollection_path %>">课程收藏<span class="sr-only">(current)</span></a></li>
+          <li><a href="<%= bookcollection_path %>">书籍收藏</a></li>
+          <li><a href="<%= newbook_path %>">申请新书</a></li>
+          <li><a href="<%= newcourse_path %>">申请课程</a></li>
+        </ul>
+			</div>
+			<!-- Middle columns : search results; course details; book details -->
+			<div class="col-sm-9 col-md-10 main col-sm-offset-3 col-md-offset-2 main">
+				<div class="container">
+					<div>
+            <div>
+              <!-- This table is for the information from table COURSE! -->
+              <table class="table table-condensed">
+                <thead>
+                  <tr id="np">
+                    <td><h1><%= @course.title %></h1></td>
+                    <td><a href="" ><button id="np-b" class="btn btn-lg course-default" ><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>收藏</button></a></td>
+                  </tr>
+                </thead>
+                <tbody id="c-info">
+                  <tr>
+                    <td>开设学校：<%= @course.school %></td>
+                    <td>开设时间：<%= @course.time %></td>
+                  </tr>
+                  <tr style="border-bottom:none;">
+                    <td colspan="2">内容简介:</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" id="c-intro"><%= @course.description %></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="course-relation">
+              <!-- This table is for the information from table COURSE-BOOK! -->
+              <table class="table table-condensed">
+                <thead id="rb-title">
+                  <td colspan="6"><h2><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>&nbsp本课程的相关书籍</h2></td>
+                </thead>
+                <tbody id="rb-list">
+		<% @book_related.each do |book| %>
+                  <tr>
+                    <td><a href="<%= bookdetail_path(book) %>"><%= book.title %></a></td>
+                    <td>第<% book.version %>版</td>
+                    <td><% book.author %></td>
+                    <td><% book.publish_time %></td>
+                    <td>难度：
+			<span class="rb-difficulty">
+			<% for i in 0...(book.difficulty / 2) %>
+			<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+			<% end %>
+                        <% for i in 0...(5 - book.difficulty/2) %>
+			<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+			</span>
+			<% end %>
+                        (<%= book.difficulty %>/10)
+		    </td>
+                    <td><span class="glyphicon glyphicon-thumbs-up plus1" aria-hidden="true"></span>
+                      <span class="badge" value><%= book.pro %></span>
+                      <span class="glyphicon glyphicon-thumbs-down plus1" aria-hidden="true"></span>
+                      <span class="badge"><%= book.con %></span>
+		     </td>
+                  </tr>
+                  <% end %>
+                </tbody>
+                <tfoot id="rb-footer">
+                  <tr>
+                    <td colspan="6"><button type="button" class="btn btn-primary btn-default">显示更多</button></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <div class="course-forum">
+              <!-- Considering the controllers of forum and course may not be the same one, so divert pages to use different controllers.-->
+              <table class="table table-condensed">
+                <thead id="cf-title">
+                  <tr>
+                    <td>
+                      <h2><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp本课程的讨论区</h2>
+                    </td>
+                  </tr>
+                </thead>
+                <tbody id="cf-content">
+                  <tr>
+                    <td>
+                      <button type="button" class="btn btn-primary btn-lg btn-block">前往讨论区 >></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+					</div>
+				</div>
+			</div>
+    </div>
+			<!-- Right sidebar : ranking lists -->
+    </div>
+    <script type="text/javascript">
+	function search_books(){
+        var keywords = document.getElementById("searchInput").value;
+        if (keywords == "" || keywords.length == 0)
+        keywords = '*';
+        self.location.href = '/search/'+keywords + '/1';
+        }
+        function search_courses(){
+        var keywords = document.getElementById("searchInput").value;
+        if (keywords == "" || keywords.length == 0)
+        keywords = '*';
+        self.location.href = '/search_course/'+keywords + '/1';
+        }
+      $("#np-b").click(function(){
+        $("#np-b").toggleClass("course-default course-liked")
+        return false;
+      });
+    </script>
+  </body>
+</html>

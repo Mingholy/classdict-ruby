@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @globalinfo.title %>
+</p>
+
+<p>
+  <strong>Publisher:</strong>
+  <%= @globalinfo.publisher %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @globalinfo.content %>
+</p>
+
+<%= link_to 'Edit', edit_globalinfo_path(@globalinfo) %> |
+<%= link_to 'Back', globalinfos_path %>

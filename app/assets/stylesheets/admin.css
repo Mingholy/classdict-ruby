@@ -1,0 +1,13 @@
+.table{
+  margin-bottom:0px;
+}
+thead tr{
+  line-height:2em;
+  font-weight:700;
+}
+.table-striped button{
+  background-color:#428BCA;
+  color:#fff;
+  border:none;
+  margin:0 5px 0 5px;
+}

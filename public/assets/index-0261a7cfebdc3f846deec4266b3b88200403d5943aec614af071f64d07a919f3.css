@@ -1,0 +1,253 @@
+.container-fluid{
+	padding:0;
+}
+a{
+	outline:none;
+}
+#cd_navbar{
+	position:absolute;
+	margin-top:30px;
+	margin-left:15%;
+	margin-right:15%;
+	width:70%;
+	zoom:1.4;
+	background-color:rgba(0,0,0,0);
+	border-color:rgba(0,0,0,0);
+	z-index:20;
+	background-image:none;
+}
+#background-img{
+	position:absolute;
+	width:100%;
+	height:100%;
+	-webkit-filter:blur(8px);
+}
+#background-img-mask,#background-img-mask-z{
+	position:absolute;
+	width:100%;
+	height:100%;
+	opacity:1;
+}
+.link-effect{
+	overflow-y:hidden;
+}
+.navbar-header a{
+	font-size:36px;
+}
+.blackboard{
+	position:relative;
+	width:100%;
+	height:768px;;
+	background:url(../images/banner.jpg);
+	background-size:100% 100%;
+	margin-bottom:60px;
+	box-shadow:0 5px 5px #555;
+}
+.text-container{
+	position:absolute;
+	left:20%;
+	right:20%;
+	bottom:27.2%;
+	color:#ddd;
+}
+.text-content{
+	position:relative;
+	font-family:微软雅黑;
+	font-size:24px;
+	margin:20px 0 20px 0;
+	text-align:center;
+}
+.slogan{
+	font-size:64px;
+}
+#index-search{
+	opacity:0;
+	position:absolute;
+	zoom:1.2;
+	bottom:37.5%;
+}
+#title-text{
+	opacity:0;
+}
+.ranking-panel{
+	padding:20px 20px 10px 20px;
+	border:2px solid #ccc;
+	border-radius:15px;
+	-moz-border-radius:25px; /* Old Firefox */
+	text-align:center;
+}
+.heat-c-left{
+	padding-right:10px;
+}
+.heat-c-mid{
+	padding-left:10px;
+	padding-right:10px;
+	border-right:2px solid #ccc;
+	border-left:2px solid #ccc;
+}
+.ranking-title{
+	font-size:20px;
+	font-weight:bold;
+	text-align:center;
+}
+.latest-comments{
+	padding-left:10px;
+	overflow:hidden;
+	height:100%;
+	text-align:left;
+}
+.rankings{
+	margin-bottom:60px;
+}
+.topquestions{
+	padding
+}
+.tq-banner{
+	margin-bottom:30px;
+}
+#footer-container{
+	margin-top:5px;
+	box-shadow:0 0px 5px 5px #555;
+	z-index:20;
+}
+.footer{
+	height:80px;
+	background-color:#32374A;
+	padding-top:16px;
+	padding-bottom:16px;
+}
+.f-links{
+	height:150px;
+	background-color:#606577;
+	border-bottom:1px solid #aaa;
+	color:#fff;
+}
+.footer-links a{
+	padding:5px 5px 5px 5px;
+	color:#fff;
+	font-weight:400;
+	margin:5px 0 5px 0;
+	font-size:16px;
+	text-decoration:none;
+}
+.footer-links a:hover{
+	color:#fff;
+	background-color:#32374A;
+	opacity:0.8;
+}
+.footer-up{
+	text-align:center;
+	margin-top:5px;
+}
+.text-muted{
+	font-size:medium;
+	color:#fff;
+	text-align:center;
+}
+#login-panel,#register-panel{
+	top:15%;
+}
+.modal input{
+	margin-bottom:10px;
+}
+
+/*
+ * CSS effects
+ */
+.link-effect{
+	min-height:60px;
+}
+.link-effect a {
+	padding: 0px;
+	color: #237546;
+	font-weight: 700;
+	text-shadow: none;
+	-webkit-transition: color 0.3s;
+	-moz-transition: color 0.3s;
+	transition: color 0.3s;
+}
+
+.link-effect a::before,
+.link-effect a::after {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	background: #fff;
+	content: '';
+	opacity: 0;
+	-webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+	-moz-transition: opacity 0.3s, -moz-transform 0.3s;
+	transition: opacity 0.3s, transform 0.3s;
+	-webkit-transform: translateY(-10px);
+	-moz-transform: translateY(-10px);
+	transform: translateY(-10px);
+}
+
+.link-effect a::before {
+	top: 0;
+	-webkit-transform: translateY(-10px);
+	-moz-transform: translateY(-10px);
+	transform: translateY(-10px);
+}
+
+.link-effect a::after {
+	bottom: 0;
+	-webkit-transform: translateY(10px);
+	-moz-transform: translateY(10px);
+	transform: translateY(10px);
+}
+
+.link-effect a:hover,
+.link-effect a:focus {
+	color: #fff;
+}
+
+.link-effect a:hover::before,
+.link-effect a:focus::before,
+.link-effect a:hover::after,
+.link-effect a:focus::after {
+	opacity: 1;
+	-webkit-transform: translateY(0px);
+	-moz-transform: translateY(0px);
+	transform: translateY(0px);
+}
+
+
+.table a{
+	text-decoration:none;
+}
+.table a::before,
+.table a::after {
+	display: inline-block;
+	opacity: 0;
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.2s;
+	-moz-transition: -moz-transform 0.3s, opacity 0.2s;
+	transition: transform 0.3s, opacity 0.2s;
+}
+
+.table a::before {
+	margin-right: 10px;
+	content: '[';
+	-webkit-transform: translateX(20px);
+	-moz-transform: translateX(20px);
+	transform: translateX(20px);
+}
+
+.table a::after {
+	margin-left: 10px;
+	content: ']';
+	-webkit-transform: translateX(-20px);
+	-moz-transform: translateX(-20px);
+	transform: translateX(-20px);
+}
+
+.table a:hover::before,
+.table a:hover::after,
+.table a:focus::before,
+.table a:focus::after {
+	opacity: 1;
+	-webkit-transform: translateX(0px);
+	-moz-transform: translateX(0px);
+	transform: translateX(0px);
+}

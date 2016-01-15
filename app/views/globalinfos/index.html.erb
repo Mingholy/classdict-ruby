@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Globalinfos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Publisher</th>
+      <th>Content</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @globalinfos.each do |globalinfo| %>
+      <tr>
+        <td><%= globalinfo.title %></td>
+        <td><%= globalinfo.publisher %></td>
+        <td><%= globalinfo.content %></td>
+        <td><%= link_to 'Show', globalinfo %></td>
+        <td><%= link_to 'Edit', edit_globalinfo_path(globalinfo) %></td>
+        <td><%= link_to 'Destroy', globalinfo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Globalinfo', new_globalinfo_path %>

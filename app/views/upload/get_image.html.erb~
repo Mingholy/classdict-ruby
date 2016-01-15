@@ -1,0 +1,11 @@
+<%= form_for(:picture, url: {action: 'save_picture'}, html: {multipart: true}) do |f| %>
+Comment:
+<%= f.text_field("comment") %><br />
+Upload your picture:
+<%= f.file_field("uploaded_picture") %><br />
+<input id="input-id" name="picutre[uploaded_picture]"type="file" class="file" data-preview-file-type="image" >
+<%= f.submit "Upload" %>
+<% end %>
+<%= javascript_include_tag 'fileinput.min.js' %>
+      <%= javascript_include_tag 'fileinput_locale_zh.js' %>
+    <%= stylesheet_link_tag 'fileinput.min.css' %>

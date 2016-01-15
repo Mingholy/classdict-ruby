@@ -1,0 +1,51 @@
+.glyphicon{
+  margin:0 5px 0 10px;
+}
+.topic-content h4,.topic-content h5{
+  margin:0px;
+}
+.content-single{
+  padding:0;
+  background:#00AAFB;
+}
+.content-single p{
+  padding:40px;
+  background:#fff;
+}
+.topic-title{
+  padding:15px;
+  margin:0px;
+  border-bottom:1px solid #ccc;
+  color:#FFF;
+  font-weight:bold;
+}
+.reply-at,.reply-footer{
+  padding:10px 15px;
+  background:#fff;
+}
+.reply-at{
+  border-bottom:1px dashed #ccc;
+  background:#FFFFD5;
+}
+.reply-footer{
+  text-align:right;
+  border-top:1px dashed #ccc;
+}
+.reply-single{
+  padding:0;
+  background:#D9EDF7;
+}
+.reply-single p{
+  padding:40px;
+  background:#fff;
+}
+.reply-title{
+  padding:15px;
+  margin:0px;
+  border-bottom:1px solid #ccc;
+  color:#555;
+  font-weight:bold;
+}
+.reply-panel input,.reply-panel textarea{
+  margin:15px 0;
+}

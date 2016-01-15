@@ -1,0 +1,230 @@
+class BooksController < ApplicationController
+  before_action :set_book, only: [:show, :edit, :update, :destroy]
+
+  # GET /books
+  # GET /books.json
+  def index
+    @books = Book.all
+  end
+
+  # GET /books/1
+  # GET /books/1.json
+  def show
+    @book.clicks = @book.clicks + 1
+    @book.save!
+  end
+
+  # GET /books/new
+  def new
+    @book = Book.new
+  end
+
+  # GET /books/1/edit
+  def edit
+  end
+
+  def bookdetail
+    @book = Book.find(params[:id])
+    #Add clicks
+    @book.clicks = @book.clicks + 1
+    @book.save!
+    #For view rendering
+    @course_related = @book.courses.order('clicks desc').limit(5)
+    @reviews = @book.book_reviews.order('pro desc').limit(10)
+    @articles = @book.book_notes.where('content_type = ?',0).order('pro desc').limit(10)
+    @questions = @book.book_notes.where('content_type = ?',1).order('pro desc').limit(10)
+  end
+
+  def write_review
+    #Check for login
+    user_id = session[:user_id]
+    book_id = params[:book_id]
+    type = params[:post_type].to_s.strip
+    if user_id.nil?
+      redirect_to root_path
+      return
+    end
+    if book_id.nil?
+      redirect_to bookdetail_path(id: book_id)
+      return
+    end
+    book = Book.find(book_id.to_i)
+    if book.nil?
+      redirect_to bookdetail_path(id: book_id)
+      return
+    end
+    new_review =  book.book_reviews.new
+    new_review.user_id = user_id
+    new_review.content = params[:content]
+    if new_review.save!
+      redirect_to bookdetail_path(id: book_id)
+      return
+    else
+      redirect_to bookdetail_path(id: book_id)
+      return
+    end
+  end
+
+  def write_note
+    #Check for login
+    user_id = session[:user_id]
+    book_id = params[:book_id]
+    if user_id.nil?
+      redirect_to root_path
+      return
+    end
+    if book_id.nil? or params[:title].nil? or params[:content].nil?
+      return
+    end
+    if Book.find(book_id.to_i).nil?
+      return
+    end
+    book = Book.find(book_id)
+    new_note =  book.book_notes.new
+    new_note.title = params[:title].strip
+    new_note.user_id = user_id
+    new_note.content = params[:content].strip
+    new_note.content_type = 0
+    if new_note.save!
+      redirect_to bookdetail_path(id: book_id)
+    else
+      redirect_to bookdetail_path(id: book_id)
+    end
+  end
+
+  def write_question
+    #Check for login
+    user_id = session[:user_id]
+    book_id = params[:book_id]
+    if user_id.nil?
+      redirect_to root_path
+      return
+    end
+    if book_id.nil? or params[:title].nil? or params[:content].nil? or params[:page].nil?
+      redirect_to bookdetail_path(id: book_id)
+      return
+    end
+    if Book.find(book_id.to_i).nil?
+      #session[:error] = 'if Book.find(book_id.to_i).nil?'
+      return
+    end
+    book = Book.find(book_id.to_i)
+    new_note =  book.book_notes.new
+    new_note.title = params[:title].strip
+    new_note.user_id = user_id.to_i
+    new_note.content = params[:content].strip
+    new_note.page = params[:page].to_i
+    new_note.content_type = 1
+    if new_note.save!
+      #session[:error] = 'saved!'
+      redirect_to bookdetail_path(id: book_id)
+    else
+      #session[:error] = 'un saved'
+      redirect_to bookdetail_path(id: book_id)
+    end
+  end
+
+  def create_newbook
+    if session[:user_id].nil?
+      redirect_to root_path
+      return
+    end
+    data = book_params
+    if data[:title].nil?
+      redirect_to newbook_path, notice: "书名不完整"
+      return
+    end
+    if data[:time].nil?
+      redirect_to newbook_path, notice: "出版日期不完整"
+      return
+    end
+    if data[:description].nil?
+      redirect_to newbook_path, notice: "内容简介不完整"
+      return
+    end
+    if data[:difficulty].nil?
+      redirect_to newbook_path, notice: "书籍难度不完整"
+      return
+    end
+    @book = Book.new
+    courses_title_list = data[:courses].split(/,/)
+    for course_title in courses_title_list do
+      course = Course.find_by(title: course_title)
+      @book.courses << course
+    end
+
+
+    @book.title = data[:title].to_s
+    @book.publish_time = data[:time]
+    @book.description = data[:description].strip
+    @book.clicks = 0
+    @book.difficulty = data[:difficulty].to_i
+    unless @book.picture_id.nil?
+    	@book.picture_id = data[:picture_id].scan(/\d+/)[0]
+    end
+    respond_to do |format|
+      if @book.save
+        @contribution = Contribution.create!(content_type: 1, content_id: @book.id, user_id: session[:user_id].to_i)
+        user = User.find(session[:user_id].to_i)
+        user.score += 10
+        user.save!
+        format.html { redirect_to @book, notice: 'Book was successfully created.' }
+        format.json { render :show, status: :created, location: @book }
+      else
+        format.html { render :new }
+        format.json { render json: @book.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # POST /books
+  # POST /books.json
+  def create
+    @book = Book.new(book_params)
+
+    respond_to do |format|
+      if @book.save
+        format.html { redirect_to @book, notice: 'Book was successfully created.' }
+        format.json { render :show, status: :created, location: @book }
+      else
+        format.html { render :new }
+        format.json { render json: @book.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /books/1
+  # PATCH/PUT /books/1.json
+  def update
+    respond_to do |format|
+      if @book.update(book_params)
+        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
+        format.json { render :show, status: :ok, location: @book }
+      else
+        format.html { render :edit }
+        format.json { render json: @book.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /books/1
+  # DELETE /books/1.json
+  def destroy
+    @book.destroy
+    respond_to do |format|
+      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_book
+      @book = Book.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def book_params
+      params.require(:book).permit(:title, :author, :publish_time,:time, :version, :filepath, :pro, :con, :difficulty, :description, :courses)
+    end
+end
