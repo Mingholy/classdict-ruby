@@ -107,7 +107,7 @@ Book.create![{ title: "当代美国史", school: "中国科学院大学", publis
 BookNote.create! [
 	{title:"1",book_id:1 ,user_id:1 ,page:1 ,content_type:0,content:"First of all, open your book anyway.:)",pro:432 ,con:122 },
 	{title:"2",book_id:2 ,user_id:2 ,page:12 ,content_type:1,content:"I want to know why the formulation is like this.",pro:230 ,con:152 },
-	{	:"3",book_id:3 ,user_id:2 ,content_type:0,content:"出来",pro:0 ,con:0 },
+	{title:"3",book_id:3 ,user_id:2 ,content_type:0,content:"出来",pro:0 ,con:0 },
 	{title:"4",book_id:2 ,user_id:2 ,content_type:0,content:"看看效果",pro:0 ,con:0 },
 	{title:"5",book_id:2 ,user_id: 2,content_type:0,content:"看看效果",pro:0 ,con:0 },
 	{title:"6",book_id:2 ,user_id:2 ,page:1 ,content_type:0,content:"心得2",pro:0 ,con: 0},
