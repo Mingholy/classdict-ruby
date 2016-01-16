@@ -129,7 +129,7 @@ Contribution.create! [
 	{id:3,user_id:4,content_type:0,content_id:20},
 	{id:4,user_id:4,content_type:0,content_id:21}
 ]
-Topic_relation.create! [
+TopicRelation.create! [
 	{id:1,topic_id:1,reply_id:9},
 	{id:2,topic_id:1,reply_id:10},
 	{id:3,topic_id:0,reply_id:11},
