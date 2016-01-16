@@ -40,5 +40,5 @@ Course.create!([
 {title: '图论', school: 'ucas', time: '2015-01-01', description: 'adfasfasfasdf',clicks: 123},
 {title: '概率论', school: 'ucas', time: '2015-01-01', description: 'adfasfasfasdf',clicks: 123},
 {title: '线性代数', school: 'ucas', time: '2015-01-01', description: 'adfasfasfasdf',clicks: 123},
-{title: '数学分析', school: 'ucas', time: '2015-01-01', description: 'adfasfasfasdf',clicks: 123},
+{title: '数学分析', school: 'ucas', time: '2015-01-01', description: 'adfasfasfasdf',clicks: 123}
 ])
