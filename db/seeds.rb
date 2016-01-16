@@ -12,7 +12,7 @@ Book.create!([
 {title: '操作系统',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
 {title: '通信原理',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
 {title: '人工智能',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
-{title: '数据库新技术',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'}
+{title: '数据库新技术',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
 {title: '数据挖掘',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
 {title: '软件工程',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
 {title: '操作系统',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
