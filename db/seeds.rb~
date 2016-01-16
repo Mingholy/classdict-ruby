@@ -105,14 +105,14 @@ Book.create![{ title: "当代美国史", school: "中国科学院大学", time: 
 
 
 BookNote.create! [
-	{title:"1",book_id:Nice,user_id:1 ,page:1 ,content_type:0,content:"First of all, open your book anyway.:)",pro:432 ,con:122 },
-	{title:"2",book_id:Not bad,   user_id:2 ,page:12 ,content_type:1,content:"I want to know why the formulation is like this.",pro:230 ,con:152 },
-	{title:"3",book_id: ,user_id:2 ,page: ,content_type:0,content:"出来",pro:0 ,con:0 },
-	{title:"4",book_id: ,user_id:2 ,page: ,content_type:0,content:"看看效果",pro:0 ,con:0 },
-	{title:"5",book_id: ,user_id: 2,page: ,content_type:0,content:"看看效果",pro:0 ,con:0 },
-	{title:"6",book_id: ,user_id:2 ,page:1 ,content_type:0,content:"心得2",pro:0 ,con: 0},
+	{title:"1",book_id:1 ,user_id:1 ,page:1 ,content_type:0,content:"First of all, open your book anyway.:)",pro:432 ,con:122 },
+	{title:"2",book_id:2 ,user_id:2 ,page:12 ,content_type:1,content:"I want to know why the formulation is like this.",pro:230 ,con:152 },
+	{title:"3",book_id:3 ,user_id:2 ,page: ,content_type:0,content:"出来",pro:0 ,con:0 },
+	{title:"4",book_id:2 ,user_id:2 ,page: ,content_type:0,content:"看看效果",pro:0 ,con:0 },
+	{title:"5",book_id:2 ,user_id: 2,page: ,content_type:0,content:"看看效果",pro:0 ,con:0 },
+	{title:"6",book_id:2 ,user_id:2 ,page:1 ,content_type:0,content:"心得2",pro:0 ,con: 0},
 	{title:"7",book_id:1,user_id:2 ,page:2 ,content_type:1,content:"怎样问问题",pro:0 ,con:0 },
-	{title:"8",book_id: ,user_id:4 ,page:1 ,content_type:0,content:"我来发个心得秀优越",pro:0 ,con:0 },	
+	{title:"8",book_id:2 ,user_id:4 ,page:1 ,content_type:0,content:"我来发个心得秀优越",pro:0 ,con:0 },	
 	{title:"9",book_id:1,user_id:3 ,page:1 ,content_type:3,content:"I really feel it is up to my mind",pro:332 ,con:244 },
 	{title:"10",book_id:1,user_id:4 ,page:1 ,content_type:3,content:"I would think otherwise.",pro:132 ,con:94 },
 	{title:"11",book_id:1,user_id: 4,page:0 ,content_type:3,content:"哈哈哈啊",pro:0 ,con:0 },
