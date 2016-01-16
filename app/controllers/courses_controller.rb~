@@ -36,7 +36,6 @@ class CoursesController < ApplicationController
     #Add clicks
     #For view rendering
     @book_related = @course.books.order('id desc').limit(5)
-    @reviews = @book.book_reviews.order('pro desc').limit(10)
   end
   # POST /courses
   # POST /courses.json

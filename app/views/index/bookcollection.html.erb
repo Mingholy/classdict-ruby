@@ -56,6 +56,7 @@
 				<div class="container-fluid">
 					<div class="results-container">
             <div class="results-content">
+	<% if @no_record == false %>
               <table class="table results">
                 <% @user_book_relations.each do |user_book| %>
                     <% book = Book.find(user_book[:book_id]) %>
@@ -100,11 +101,13 @@
                 </tbody>
                     <% end %>
               </table>
+	<% end %>
             </div>
             <div class="page-control">
               <nav>
                 <ul class="pagination pagination-lg">
                   <li <% if @page == 1 %>class="disabled"<% end %>><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+		<% if @page_count > 0 %>
                   <% for i in 1..@page_count %>
                       <li <% if @page == i %>class="active"<% end %>>
                         <% if @keywords.nil? or @keywords.length == 0 %>
@@ -112,6 +115,7 @@
                         <% end %>
                           <%= link_to i , bookcollection_path(keywords: @keywords,page: i)  %></li>
                   <% end %>
+		<% end %>
                   <li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
                 </ul>
               </nav>

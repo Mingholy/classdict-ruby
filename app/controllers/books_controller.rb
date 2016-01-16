@@ -222,15 +222,16 @@ class BooksController < ApplicationController
 
 
     @book.title = data[:title].to_s
+    @book.title = data[:author].to_s
     @book.publish_time = data[:time]
     @book.description = data[:description].strip
     @book.clicks = 0
     @book.difficulty = data[:difficulty].to_i
-    unless @book.picture_id.nil?
+    unless data[:picture_id].nil?
     	@book.picture_id = data[:picture_id].scan(/\d+/)[0]
     end
     respond_to do |format|
-      if @book.save
+      if @book.save!
         @contribution = Contribution.create!(content_type: 1, content_id: @book.id, user_id: session[:user_id].to_i)
         user = User.find(session[:user_id].to_i)
         user.score += 10
@@ -292,6 +293,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :author, :publish_time,:time, :version, :filepath, :pro, :con, :difficulty, :description, :courses)
+      params.require(:book).permit(:picture_id, :title, :author, :publish_time,:time, :version, :filepath, :pro, :con, :difficulty, :description, :courses)
     end
 end

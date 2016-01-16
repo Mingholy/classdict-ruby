@@ -72,12 +72,12 @@
             <div class="results-content">
               <table class="table results">
                 <% @books.each do |book| %>
-                  <% @picture_id = book.picture_id %>
-                  <% @picture_id = 0 if book.picture_id.nil? %>
+                  <% picture_id = book.picture_id %>
+                  <% picture_id = 0 if book.picture_id.nil? %>
                 <tbody class="b-result">
                   <tr class="b-title">
                     <td rowspan="3" class="c-thumb">
-                      <a href=<%= bookdetail_path(book) %> data-hover="<%= book.title %>"><img src="<%= url_for controller: :upload ,action: :picture, id: @picture_id %>" id="tq-q1-img" data-src="holder.js/200x200" class="img-thumbnail" alt="course name" data-holder-rendered="true"></a>
+                      <a href=<%= bookdetail_path(book) %> data-hover="<%= book.title %>"><img src="<%= url_for controller: :upload ,action: :picture, id: picture_id %>" id="tq-q1-img" data-src="holder.js/200x200" class="img-thumbnail" alt="course name" data-holder-rendered="true"></a>
                     </td>
                     <td class="b-name">
                       <a href=<%= bookdetail_path(book) %> data-hover="<%= book.title %>"><%= book.title %></a>

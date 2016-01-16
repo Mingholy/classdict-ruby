@@ -37,3 +37,5 @@ Course.create!([
 {title: '软件工程', school: 'ucas', time: '2015-01-01', description: 'adfasfasfasdf',clicks: 123},
 {title: '软件工程', school: 'ucas', time: '2015-01-01', description: 'adfasfasfasdf',clicks: 123},
 ])
+
+User.create!([{email:'123@123', password: '123456', nickname:'123', level:'2',score:'20'}])

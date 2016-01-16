@@ -4,6 +4,7 @@
 	var c = $("img").attr("src");
 	$(document).ready(function(){
 		$("#book-cover",window.parent.document).val(c);
-		$("#book-cover",window.parent.document).val(c);
+		$("#course-cover",window.parent.document).val(c);
+		alert($("#book-cover",window.parent.document).val());
 	});
 <%end%>

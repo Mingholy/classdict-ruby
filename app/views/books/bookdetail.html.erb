@@ -87,7 +87,7 @@
                       <% if @book.picture_id.nil? %>
                           <% @book.picture_id = 0 %>
                       <% end %>
-                      <img class="bd-thumb" data-src="holder.js/200x200" class="img-thumbnail" alt="course name" src="<%= url_for controller: :upload ,action: :picture, id: @book.picture_id %>" data-holder-rendered="true"></td>
+                      <img class="bd-thumb" data-src="holder.js/200x200" class="img-thumbnail" alt="book name" src="<%= url_for controller: :upload ,action: :picture, id: @book.picture_id %>" data-holder-rendered="true"></td>
                     <td class="bd-attr">著者:</td>
                     <td><%= @book.author %></td>
                   </tr>

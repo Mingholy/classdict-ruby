@@ -66,12 +66,18 @@ class IndexController < ApplicationController
     end
     #store in session
     session[:keywords] = params[:keywords]
-    @keywords = params[:keywords]
     @page = params[:page].to_i
+    @keywords = params[:keywords]
+    @page_count = (User.find(session[:user_id].to_i).books.length / 5.0).ceil
+    @no_record = false
     if @keywords == '*' or @keywords.nil?
       @keywords = ''
     end
-    @page_count = (User.find(session[:user_id].to_i).books.length / 5.0).ceil
+    if @page_count == 0
+      @no_record = true
+      return
+    end
+    
     @user_book_relations = Userbook.where(user_id: session[:user_id].to_i).order('created_at desc').offset((@page - 1) * 5).limit(5)
   end
 
@@ -82,10 +88,15 @@ class IndexController < ApplicationController
     end
     @keywords = params[:keywords]
     @page = params[:page].to_i
+    @page_count = (User.find(session[:user_id].to_i).courses.length / 5.0).ceil
+    @no_record = false
     if @keywords == '*' or @keywords.nil?
       @keywords = ''
     end
-    @page_count = (User.find(session[:user_id].to_i).courses.length / 5.0).ceil
+    if @page_count == 0
+      @no_record = true
+      return
+    end
     @user_course_relations = Usercourse.where(user_id: session[:user_id].to_i).order('created_at desc').offset((@page - 1) * 5).limit(5)
   end
 

@@ -59,7 +59,7 @@
 <h2>申请添加新的书籍</h2>
 <hr>
 					<div class="newbook col-sm-6">
-              <%= form_for :book , html: {id: "newbook-form",ENCTYPE:"multipart/form-data"},url:{controller: :books, action: :create_newbook} do |f|  %>
+              <%= form_for :book , html: {id: "newbook-form"},url:{controller: :books, action: :create_newbook} do |f|  %>
               <div class="form-group">
 		<%= f.hidden_field :picture_id , id:"book-cover", class: "form-control", placeholder: "" %>
                 <label for="book-title">书籍题名</label>
