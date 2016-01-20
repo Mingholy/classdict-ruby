@@ -56,7 +56,8 @@ class UsersController < ApplicationController
         session[:user_id] = @user.id
         redirect_to index_usercenter_path
         flash[:notice] = "欢迎登录!"
-      elsif !User.find_by(email:params[:email]).nil?
+      end
+      unless User.find_by(email:params[:email]).nil?
         redirect_to root_path
         flash[:notice] = "Email已经被占用!"
       else
