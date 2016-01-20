@@ -56,13 +56,14 @@ class UsersController < ApplicationController
         session[:user_id] = @user.id
         redirect_to index_usercenter_path
         flash[:notice] = "欢迎登录!"
-      end
-      unless User.find_by(email:params[:email]).nil?
-        redirect_to root_path
-        flash[:notice] = "Email已经被占用!"
       else
-        redirect_to root_path
-        flash[:notice] = "密码填写错误!"
+        unless User.find_by(email:params[:email]).nil?
+          redirect_to root_path
+          flash[:notice] = "Email已经被占用!"
+        else
+          redirect_to root_path
+          flash[:notice] = "密码填写错误!"
+        end
       end
   end
 
