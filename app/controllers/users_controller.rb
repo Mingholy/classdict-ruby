@@ -57,7 +57,7 @@ class UsersController < ApplicationController
         redirect_to index_usercenter_path
         flash[:notice] = "欢迎登录!"
       else
-        usercheck = User.find_by(email:params[:email])
+        usercheck = 'User.find_by(email:params[:email])'
         if usercheck.nil?
           flash[:notice] = "密码填写错误!"
           redirect_to root_path
