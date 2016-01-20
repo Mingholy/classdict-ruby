@@ -56,7 +56,7 @@
 				<div class="container-fluid">
 					<div class="results-container">
             <div class="results-content">
-	<% if @no_record == false %>
+              <% if @no_record == false %>
               <table class="table results">
                 <% @user_book_relations.each do |user_book| %>
                     <% book = Book.find(user_book[:book_id]) %>
@@ -65,9 +65,7 @@
                 <tbody class="b-result">
                   <tr class="b-title">
                     <td rowspan="3" class="c-thumb">
-                      <!--
-                      <img id="tq-q1-img" data-src="holder.js/200x200" class="img-thumbnail" alt="course name" style="width: 100%; height: 100%;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzIwMHgyMDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTIxYzcwYWVhNiB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1MjFjNzBhZWE2Ij48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9Ijc1LjUiIHk9IjEwNC41Ij4yMDB4MjAwPC90ZXh0PjwvZz48L2c+PC9zdmc+" data-holder-rendered="true">
-                      -->
+                      <img id="tq-q1-img" data-src="holder.js/200x200" class="img-thumbnail" alt="course name" style="width: 100%; height: 100%;" src="<%= book.picture_id>" data-holder-rendered="true">
                       <a href=<%= bookdetail_path(book) %> data-hover="<%= book.title %>"><img src="<%= url_for controller: :upload ,action: :picture, id: @picture_id %>" width="232" height="191" id="tq-q1-img" data-src="holder.js/200x200" class="img-thumbnail" alt="course name" data-holder-rendered="true"></a>
                     </td>
                     <td class="b-name">
@@ -101,13 +99,13 @@
                 </tbody>
                     <% end %>
               </table>
-	<% end %>
+            <% end %>
             </div>
             <div class="page-control">
               <nav>
                 <ul class="pagination pagination-lg">
                   <li <% if @page == 1 %>class="disabled"<% end %>><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-		<% if @page_count > 0 %>
+                  <% if @page_count > 0 %>
                   <% for i in 1..@page_count %>
                       <li <% if @page == i %>class="active"<% end %>>
                         <% if @keywords.nil? or @keywords.length == 0 %>
@@ -115,7 +113,7 @@
                         <% end %>
                           <%= link_to i , bookcollection_path(keywords: @keywords,page: i)  %></li>
                   <% end %>
-		<% end %>
+                  <% end %>
                   <li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
                 </ul>
               </nav>
@@ -123,7 +121,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- Right sidebar : ranking lists -->
 	</div>
       </div>
   </body>

@@ -93,10 +93,10 @@
                     <td><% book.publish_time %></td>
                     <td>难度：
 			<span class="rb-difficulty">
-			<% for i in 0...(book.difficulty / 2) %>
+			<% for i in 0...(book.difficulty) %>
 			<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
 			<% end %>
-                        <% for i in 0...(5 - book.difficulty/2) %>
+                        <% for i in 0...(5 - book.difficulty) %>
 			<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
 			</span>
 			<% end %>

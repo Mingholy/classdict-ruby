@@ -107,13 +107,13 @@
                     <td class="bd-attr">难度:</td>
                     <td>
                       <span>
-                        <% for i in 0...(@book.difficulty / 2) %>
+                        <% for i in 0...(@book.difficulty) %>
                           <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                         <% end %>
-                        <% for i in 0...(5 - @book.difficulty/2) %>
+                        <% for i in 0...(5 - @book.difficulty) %>
                           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
                         <% end %>
-                        (<%= @book.difficulty %>/10)
+                        (<%= @book.difficulty %>/5)
                       </span>
                     </td>
                   </tr>
