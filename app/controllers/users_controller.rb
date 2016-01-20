@@ -59,7 +59,8 @@ class UsersController < ApplicationController
       else unless User.find_by(email:params[:email]).nil?
         redirect_to root_path
         flash[:notice] = "Email已经被占用!"
-      else 
+      else
+        redirect_to root_path
         flash[:notice] = "密码填写错误!"
       end
   end
