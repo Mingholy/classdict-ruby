@@ -224,7 +224,8 @@ class BooksController < ApplicationController
     @book.title = data[:title].to_s
     @book.author = data[:author].to_s
     #@book.publish_time = data[:time]
-    @book.description = data[:description].strip
+    #@book.description = data[:description].strip
+    @book.description = data[:time]
     @book.clicks = 0
     @book.difficulty = data[:difficulty].to_i
     unless data[:picture_id].nil?
