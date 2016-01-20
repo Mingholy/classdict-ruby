@@ -58,12 +58,12 @@ class UsersController < ApplicationController
         flash[:notice] = "欢迎登录!"
       else
         usercheck = User.find_by(email:params[:email])
-        unless usercheck.nil?
-          redirect_to root_path
-          flash[:notice] = "Email已经被占用!"
-        else
+        if usercheck.nil?
           redirect_to root_path
           flash[:notice] = "密码填写错误!"
+        else
+          redirect_to root_path
+          flash[:notice] = "Email已经被占用"
         end
       end
   end
