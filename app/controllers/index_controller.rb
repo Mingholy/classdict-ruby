@@ -61,6 +61,7 @@ class IndexController < ApplicationController
 
   def bookcollection
     if session[:user_id].nil?
+      flash[:notice] = "请先登录!"
       redirect_to root_path
       return
     end
@@ -83,6 +84,7 @@ class IndexController < ApplicationController
 
   def coursecollection
     if session[:user_id].nil?
+      flash[:notice] = "请先登录!"
       redirect_to root_path
       return
     end

@@ -52,15 +52,15 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
-
       if @user.save
-	session[:user_id] = @user.id
+        session[:user_id] = @user.id
         redirect_to index_usercenter_path
-	flash[:notice] = "欢迎登录"
-      else
+        flash[:notice] = "欢迎登录!"
+      else unless User.find_by(email:params[:email]).nil?
         redirect_to root_path
-	flash[:notice] = "Email已经被占用"
+        flash[:notice] = "Email已经被占用!"
+      else 
+        flash[:notice] = "密码填写错误!"
       end
   end
 
