@@ -223,7 +223,7 @@ class BooksController < ApplicationController
 
     @book.title = data[:title].to_s
     @book.author = data[:author].to_s
-    @book.publish_time = data[:time]
+    @book.publish_time = data[:time].to_s
     @book.description = data[:description].strip
     @book.clicks = 0
     @book.difficulty = data[:difficulty].to_i
