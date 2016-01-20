@@ -59,16 +59,16 @@ class UsersController < ApplicationController
       else
         usercheck = User.find_by(email:params[:email])
         if usercheck.nil?
-          redirect_to root_path
           flash[:notice] = "密码填写错误!"
-        else
           redirect_to root_path
+        else
           flash[:notice] = "Email已经被占用"
+          redirect_to root_path
         end
       end
   end
 
-  # PATCH/PUT /users/1
+  # PATCH/PUT /users/1  
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
