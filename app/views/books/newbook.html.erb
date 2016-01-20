@@ -72,10 +72,8 @@
                 <%= f.text_field :version , class: "form-control", placeholder: "书籍版别" %>
                 <label for="book-course">对应课程</label>
                 <%= f.text_field :courses , class: "form-control", placeholder: "对应课程, 多个课程请用半角逗号','隔开" %>
-                <label for="book-ref">可预览的文件路径</label>
-                <%= f.text_field :filepath , class: "form-control", placeholder: "可选; 在不存在版权问题的情况下可以提供.", type: "url" %>
                 <label for="book-difficulty">书籍难度</label>
-                 <%= f.text_field :difficulty , class: "form-control", placeholder: "书籍难度, 请填写0-5的整数.", type: "number" %>
+                 <%= f.text_field :difficulty , class: "form-control", placeholder: "书籍难度, 请填写0-5的整数.", type: "number", min:"1", max:"5",data-date-format:"yyyy-mm-dd" %>
                 <label for="book-intro">内容简介</label>
                 <%=f.text_area :description , row: 3, class: "form-control", placeholder:"内容简介"  %>
               </div>
