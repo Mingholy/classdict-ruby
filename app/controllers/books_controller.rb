@@ -191,13 +191,13 @@ class BooksController < ApplicationController
     redirect_to book_topic_path(book_id: session[:book_id].to_i, note_id: session[:note_id].to_i)
   end
 
-  #def related_course
-   # keyword = params[:kwd]
-   # unless keyword.nil? or keyword == ''
-   #   pattern = 'title like ?','%'+keyword+'%'
-   #   @suggest = Course.where(pattern).limit(5)
-   # end
-  #end
+  def related_course
+    keyword = params[:kwd]
+    unless keyword.nil? or keyword == ''
+      pattern = 'title like ?','%'+keyword+'%'
+      @suggest = Course.where(pattern).limit(5)
+    end
+  end
 
   def create_newbook
     if session[:user_id].nil?
