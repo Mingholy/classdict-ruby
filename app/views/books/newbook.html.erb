@@ -59,7 +59,7 @@
 <h2>申请添加新的书籍</h2>
 <hr>
 					<div class="newbook col-sm-6">
-              <%= form_for :book , html: {id: "newbook-form"},url:{controller: :books, action: :create_newbook} do |f|  %>
+              <%= form_for :book , html: {id: "newbook-form", onkeypress:"if(event.keyCode==13)return false;"},url:{controller: :books, action: :create_newbook} do |f|  %>
               <div class="form-group">
 		<%= f.hidden_field :picture_id , id:"book-cover", class: "form-control", placeholder: "" %>
                 <label for="book-title">书籍题名</label>
@@ -71,7 +71,8 @@
                 <label for="book-title">书籍版别</label>
                 <%= f.text_field :version , class: "form-control", placeholder: "书籍版别" %>
                 <label for="book-course">对应课程</label>
-                <%= f.text_field :courses , class: "form-control", id:"related-course", placeholder: "对应课程" %>
+		<input type="text" class="form-control" name="book[courses]" id="related-course" data-toggle="tags" placeholder:"对应课程">
+                <%#<%= f.text_field :courses , class: "form-control", id:"related-course", data-toggle:"tags" placeholder: "对应课程" %>
                 <ul id="search-list">
                 </ul>
                 <label for="book-difficulty">书籍难度</label>
@@ -94,6 +95,7 @@
       <%= javascript_include_tag 'bootstrap-datepicker.min.js' %>
       <%= javascript_include_tag 'fileinput.min.js' %>
       <%= javascript_include_tag 'fileinput_locale_zh.js' %>
+      <%= javascript_include_tag 'jquery.tags.min.js' %>
       <%= javascript_tag do %>
         function search_books(){
         var keywords = document.getElementById("searchInput").value;
@@ -108,37 +110,44 @@
         self.location.href = '/search_course/'+keywords + '/1';
         }
         $(document).ready(function(){
+          //simulate a enter event to add tags
+          var enter = jQuery.Event("keypress");
+          enter.keyCode =300;
           $("#book-time").attr("data-provide","datepicker");
-	  //ajax obtain search suggestions
+	        //ajax obtain search suggestions
           $("#search-list").delegate(".sug","click",function(){
-	    value = $(this).find("span").text();
-	    $("#related-course").val(value);
-	    $("#search-list").css("display","none");
-	  });
-          $("#related-course").keyup(function(){
-            if($("#related-course").val().trim()!=""){
+            value = $(this).find("span").text();
+            $(".select_course").val(value);
+            $("#search-list").css("display","none");
+            $(".select_course").focus();
+            $(".select_course").trigger(enter);
+          });
+          $(".select_course").keyup(function(){
+            //check keywords
+            if($(".select_course").val().trim()!=""){
               $.ajax({
                 type: "GET",
                 url: "/books/related_course.json",
-                data: {kwd:$("#related-course").val().trim()},
+                data: {kwd:$(".select_course").val().trim()},
                 dataType: "json",
                 success: function(data){
-		    $("#search-list").css("display","initial")
-		      if(data != ""){
-		        $("#search-list").empty();
-                        $.each(data, function(i){
-                        $("#search-list").append("<li class='sug'><span>"+data[i].title+"</span>&nbsp"+data[i].school+"&nbsp"+data[i].time+"</li>");
-                        });
-		      }else{
-		        $("#search-list").empty();
-		        $("#search-list").append("<li><a href='/newcourse'>没有相关的课程，先去添加一门吧！</a></li>")
-		}}
+                  $("#search-list").css("display","initial")
+                  if(data != ""){
+                    $("#search-list").empty();
+                    $.each(data, function(i){
+                      $("#search-list").append("<li class='sug'><span>"+data[i].title+"</span>&nbsp"+data[i].school+"&nbsp"+data[i].time+"</li>");
+                    });
+                  }else{
+                    $("#search-list").empty();
+                    $("#search-list").append("<li><a href='/newcourse'>没有相关的课程，先去添加一门吧！</a></li>")
+                  }
+                }
               });
             }else{
-		$("#search-list").css("display","none");
-	    }
+              $("#search-list").css("display","none");
+            }
           });
-	});
+        });
       <% end %>
       </div>
   </body>

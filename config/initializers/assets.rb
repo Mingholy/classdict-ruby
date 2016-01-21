@@ -17,9 +17,11 @@ Rails.application.config.assets.precompile += %w( results.css )
 Rails.application.config.assets.precompile += %w( topicdetail.css )
 Rails.application.config.assets.precompile += %w( usermain.css )
 Rails.application.config.assets.precompile += %w( courseforum.css )
-
+Rails.application.config.assets.precompile += %w( fileinput.min.css )
 Rails.application.config.assets.precompile += %w( bootstrap-datepicker3.css )
+
 Rails.application.config.assets.precompile += %w( bootstrap-datepicker.min.js )
 Rails.application.config.assets.precompile += %w( fileinput.min.js )
 Rails.application.config.assets.precompile += %w( fileinput_locale_zh.js )
-Rails.application.config.assets.precompile += %w( fileinput.min.css )
+Rails.application.config.assets.precompile += %w( jquery.tags.min.js )
+
