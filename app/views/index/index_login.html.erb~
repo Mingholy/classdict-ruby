@@ -56,6 +56,7 @@
 <body>
 <section class="title">
   <div class="container-fluid">
+<div id="sys-message" class="" style="position:fixed;z-index=40;width:100%;text-align:center;opacity:0.8;margin:0;background:#f2dede;z-index:40;text-size:24px;" role="alert"><%= flash[:notice] %></div>
     <nav id="cd_navbar"class="navbar navbar-inverse">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-menu" aria-controls="navbar">
@@ -73,6 +74,7 @@
       </div>
     </nav>
     <div class="blackboard">
+      <%= image_tag 'banner.jpg',style:"width:100%;height:100%;",id: "background-img-mask-z"  %>
       <%= image_tag 'banner.jpg',style:"width:100%;height:100%;",id: "background-img"  %>
       <%= image_tag 'banner.jpg',style:"width:100%;height:100%;",id: "background-img-mask"  %>
 
