@@ -231,6 +231,7 @@ class BooksController < ApplicationController
 
     @book.title = data[:title].to_s
     @book.author = data[:author].to_s
+    @book.version = data[:version].to_s
     @book.publish_time = data[:time]
     @book.description = data[:description].strip
     @book.clicks = 0
