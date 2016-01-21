@@ -59,7 +59,7 @@
 <h2>申请添加新的书籍</h2>
 <hr>
 					<div class="newbook col-sm-6">
-              <%= form_for :book , html: {id: "newbook-form",ENCTYPE:"multipart/form-data"},url:{controller: :books, action: :create_newbook} do |f|  %>
+              <%= form_for :book , html: {id: "newbook-form"},url:{controller: :books, action: :create_newbook} do |f|  %>
               <div class="form-group">
 		<%= f.hidden_field :picture_id , id:"book-cover", class: "form-control", placeholder: "" %>
                 <label for="book-title">书籍题名</label>
@@ -67,15 +67,15 @@
                 <label for="book-author">著者</label>
                 <%= f.text_field :author , class: "form-control", placeholder: "著者" %>
                 <label for="book-publish-time">出版日期</label>
-                <%= f.text_field :time , class: "form-control datepicker", id:"book-time", placeholder: "出版日期" %>
+                <input type="text" class="form-control datepicker" id="book-publish-time" placeholder="出版日期" data-provide="datepicker" data-date-format="yyyy-mm-dd" name="book[time]">
                 <label for="book-title">书籍版别</label>
                 <%= f.text_field :version , class: "form-control", placeholder: "书籍版别" %>
                 <label for="book-course">对应课程</label>
-                <%= f.text_field :courses , class: "form-control", placeholder: "对应课程, 多个课程请用半角逗号','隔开" %>
-                <label for="book-ref">可预览的文件路径</label>
-                <%= f.text_field :filepath , class: "form-control", placeholder: "可选; 在不存在版权问题的情况下可以提供.", type: "url" %>
+                <%= f.text_field :courses , class: "form-control", id:"related-course", placeholder: "对应课程" %>
+                <ul id="search-list">
+                </ul>
                 <label for="book-difficulty">书籍难度</label>
-                 <%= f.text_field :difficulty , class: "form-control", placeholder: "书籍难度, 请填写0-5的整数.", type: "number" %>
+                <%= f.text_field :difficulty , class: "form-control", placeholder: "书籍难度, 请填写0-5的整数.", type: "number", min:"1", max:"5"%>
                 <label for="book-intro">内容简介</label>
                 <%=f.text_area :description , row: 3, class: "form-control", placeholder:"内容简介"  %>
               </div>
@@ -95,7 +95,6 @@
       <%= javascript_include_tag 'fileinput.min.js' %>
       <%= javascript_include_tag 'fileinput_locale_zh.js' %>
       <%= javascript_tag do %>
-	
         function search_books(){
         var keywords = document.getElementById("searchInput").value;
         if (keywords == "" || keywords.length == 0)
@@ -110,7 +109,36 @@
         }
         $(document).ready(function(){
           $("#book-time").attr("data-provide","datepicker");
-        });
+	  //ajax obtain search suggestions
+          $("#search-list").delegate(".sug","click",function(){
+	    value = $(this).find("span").text();
+	    $("#ralated-course").val(value);
+	    $("#search-list").css("display","none");
+	  });
+          $("#related-course").keyup(function(){
+            if($("#related-course").val().trim()!=""){
+              $.ajax({
+                type: "GET",
+                url: "/books/related_course.json",
+                data: {kwd:$("#related-course").val().trim()},
+                dataType: "json",
+                success: function(data){
+		    $("#search-list").css("display","initial")
+		      if(data != ""){
+		        $("#search-list").empty();
+                        $.each(data, function(i){
+                        $("#search-list").append("<li class='sug'><span>"+data[i].title+"</span>&nbsp"+data[i].school+"&nbsp"+data[i].time+"</li>");
+                        });
+		      }else{
+		        $("#search-list").empty();
+		        $("#search-list").append("<li><a href='/newcourse'>没有相关的课程，先去添加一门吧！</a></li>")
+		}}
+              });
+            }else{
+		$("#search-list").css("display","none");
+	    }
+          });
+	});
       <% end %>
       </div>
   </body>

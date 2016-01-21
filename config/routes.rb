@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   		
   ##########book##########
   get 'newbook' => 'books#newbook', as: :newbook
+  get 'books/related_course' => 'books#related_course'
   post 'books' => 'books#create_newbook'
   get 'books/detail/:id' => 'books#bookdetail', as: :bookdetail
 
