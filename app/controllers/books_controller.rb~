@@ -194,7 +194,7 @@ class BooksController < ApplicationController
   def related_course
     keyword = params[:kwd]
     unless keyword.nil? or keyword == ''
-      pattern = 'title like ?','%软件工程%'
+      pattern = 'title like ?','%'+keyword+'%'
       @suggest = Course.where(pattern).limit(5)
     end
   end
