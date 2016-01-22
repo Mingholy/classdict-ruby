@@ -89,9 +89,9 @@
 		<% @book_related.each do |book| %>
                   <tr>
                     <td><a href="<%= bookdetail_path(book) %>"><%= book.title %></a></td>
-                    <td>第<% book.version %>版</td>
-                    <td><% book.author %></td>
-                    <td><% book.publish_time %></td>
+                    <td>第<%= book.version %>版</td>
+                    <td><%= book.author %></td>
+                    <td><%= book.publish_time %></td>
                     <td>难度：
 			<span class="rb-difficulty">
 			<% for i in 0...(book.difficulty) %>
