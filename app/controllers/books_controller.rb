@@ -24,6 +24,15 @@ class BooksController < ApplicationController
   end
 
   def bookdetail
+    @collected = false
+    if session[:user_id].nil?
+      @user = nil
+    else
+      @user = User.find(session[:user_id])
+      if Userbook.where('user_id = ? and book_id = ?',session[:user_id],params[:id]).count > 0
+        @collected = true
+      end
+    end
     @book = Book.find(params[:id])
     #Add clicks
     @book.clicks = @book.clicks + 1
@@ -223,6 +232,14 @@ class BooksController < ApplicationController
     end
     @book = Book.new
     courses_title_list = data[:courses].split(/,/)
+    courses_title_list = courses_title_list.to_set.to_a
+    for course_title in courses_title_list do
+      course = Course.find_by(title: course_title)
+      if course.nil?
+        redirect_to newbook_path, notice: "错误的课程名"
+        return
+      end
+    end
     for course_title in courses_title_list do
       course = Course.find_by(title: course_title)
       @book.courses << course

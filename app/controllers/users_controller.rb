@@ -33,7 +33,38 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
-
+  def like_or_dislike_book
+    @book = Book.find(params[:book_id])
+    @user = User.find(session[:user_id])
+    if @user.nil?
+      redirect_to root_path
+    end
+    if Userbook.where('user_id = ? and book_id = ?',session[:user_id],params[:book_id]).count <= 0
+      #I do not have this book.
+      @user.books << @book
+    else
+      #I want to forget this.
+      relation = Userbook.where('user_id = ? and book_id = ?',session[:user_id],params[:book_id])[0]
+      relation.delete
+    end
+    redirect_to :back
+  end
+  def like_or_dislike_course
+    @course = Course.find(params[:course_id])
+    @user = User.find(session[:user_id])
+    if @user.nil? or  @course.nil?
+      redirect_to root_path
+    end
+    if Usercourse.where('user_id = ? and course_id = ?',session[:user_id],params[:course_id]).count <= 0
+      #I do not have this book.
+      @user.courses <<  @course
+    else
+      #I want to forget this.
+      relation = Usercourse.where('user_id = ? and course_id = ?',session[:user_id],params[:course_id])[0]
+      relation.delete
+    end
+    redirect_to :back
+  end
   # GET /users/1
   # GET /users/1.json
   def show

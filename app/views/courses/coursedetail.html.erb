@@ -27,7 +27,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/logout">注销</a></li>
            <li><a href="<%= index_usercenter_path %>">用户中心</a></li>
-            <li><a href="/:user/:id/messages">消息<span class="badge">14</span></a></li>
+            <!-- <li><a href="/:user/:id/messages">消息<span class="badge">14</span></a></li> -->
           </ul>
           <form class="navbar-form navbar-left">
             <input type="text" id="searchInput" class="form-control" placeholder="搜索课程或者书籍..." value="<%= params[:keywords] %>">
@@ -61,8 +61,9 @@
                 <thead>
                   <tr id="np">
                     <td><h1><%= @course.title %></h1></td>
-                    <td><a href="" ><button id="np-b" class="btn btn-lg course-default" ><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>收藏</button></a></td>
-                  </tr>
+                    
+                    <td><% unless @user.nil? %><a href="" ><button id="np-b" class="btn btn-lg <% if @collected %>course-liked<% else %>course-default<% end %>"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>收藏</button></a><% end %></td>
+                    </tr>
                 </thead>
                 <tbody id="c-info">
                   <tr>
@@ -156,7 +157,8 @@
         self.location.href = '/search_course/'+keywords + '/1';
         }
       $("#np-b").click(function(){
-        $("#np-b").toggleClass("course-default course-liked")
+        //$("#np-b").toggleClass("course-default course-liked")
+        self.location.href = '/like_or_dislike_course/' + <%= @course.id %>
         return false;
       });
     </script>

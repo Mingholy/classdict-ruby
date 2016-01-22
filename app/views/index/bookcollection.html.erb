@@ -27,7 +27,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a href="<%= logout_path %>">注销</a></li>
             <li><a href="<%= index_usercenter_path %>">用户中心</a></li>
-            <li><a href="/:user/:id/messages">消息<span class="badge">14</span></a></li>
+            <!-- <li><a href="/:user/:id/messages">消息<span class="badge">14</span></a></li> -->
           </ul>
           <form class="navbar-form navbar-left">
             <input type="text" id="searchInput" class="form-control" placeholder="搜索课程或者书籍..." value="<%= params[:keywords] %>">
@@ -65,7 +65,6 @@
                 <tbody class="b-result">
                   <tr class="b-title">
                     <td rowspan="3" class="c-thumb">
-                      <img id="tq-q1-img" data-src="holder.js/200x200" class="img-thumbnail" alt="course name" style="width: 100%; height: 100%;" src="<%= book.picture_id %>" data-holder-rendered="true">
                       <a href=<%= bookdetail_path(book) %> data-hover="<%= book.title %>"><img src="<%= url_for controller: :upload ,action: :picture, id: @picture_id %>" width="232" height="191" id="tq-q1-img" data-src="holder.js/200x200" class="img-thumbnail" alt="course name" data-holder-rendered="true"></a>
                     </td>
                     <td class="b-name">

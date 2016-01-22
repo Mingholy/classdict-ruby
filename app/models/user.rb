@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
   has_many :books, :through => :userbooks
   has_many :userinfos
   has_many :book_reviews
+
 end

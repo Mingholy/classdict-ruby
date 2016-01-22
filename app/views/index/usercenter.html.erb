@@ -41,7 +41,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a href=<%= logout_path %>>注销</a></li>
             <li><a href="<%= index_usercenter_path %>">用户中心</a></li>
-            <li><a href="/:user/:id/messages">消息<span class="badge">14</span></a></li>
+            <!-- <li><a href="/:user/:id/messages">消息<span class="badge">14</span></a></li> -->
           </ul>
           <form class="navbar-form navbar-left">
             <input type="text" id="searchInput" class="form-control" placeholder="搜索课程或者书籍..." value="<%= params[:keywords] %>">
@@ -92,62 +92,50 @@
               <div class="tab-content">
                 <!-- Courses collections goes here. -->
                 <div id="latest-bc" role="tabpanel" class="list-group tab-pane fade in active">
-                  <h3><a href="coursecollection.html"><button class="btn btn-default">查看全部</button></a></h3>
+                  <h3><a href="<%= coursecollection_path %>"><button class="btn btn-default">查看全部</button></a></h3>
                   <div class="row">
+                    <% number = 6 %>
+                    <% number = @user_course_relations.count if @user_course_relations.count < 6 %>
+                    <% for i in 0...number %>
+                        <% course = Course.find(@user_course_relations[i].course_id) %>
+                        <% if course.picture_id.nil? %>
+                            <% course.picture_id = 1 %>
+                        <% end %>
+                    <div class="col-sm-2">
+                      <a href="<%= coursedetail_path(course) %>"><img id="tq-q3-img" src="<%= url_for controller: :upload ,action: :picture, id: course.picture_id %>" data-src="holder.js/200x200" class="img-thumbnail" alt="200x200" style="width: 200px; height: 200px;" data-holder-rendered="true"></a>
+                      <a href="<%= coursedetail_path(course) %>"><%= course.title.strip %></a>
+                    </div>
+                    <% end %>
+                    <% for i in 0...(6-number) %>
                     <div class="col-sm-2">
                       <img id="tq-q3-img" data-src="holder.js/200x200" class="img-thumbnail" alt="200x200" style="width: 200px; height: 200px;" data-holder-rendered="true">
-                      <a href="#">软件工程</a>
+                      <a href="#">暂未收藏</a>
                     </div>
-                    <div class="col-sm-2">
-                      <img id="tq-q3-img" data-src="holder.js/200x200" class="img-thumbnail" alt="200x200" style="width: 200px; height: 200px;" data-holder-rendered="true">
-                      <a href="#">软件工程</a>
-                    </div>
-                    <div class="col-sm-2">
-                      <img id="tq-q3-img" data-src="holder.js/200x200" class="img-thumbnail" alt="200x200" style="width: 200px; height: 200px;" data-holder-rendered="true">
-                      <a href="#">软件工程</a>
-                    </div>
-                    <div class="col-sm-2">
-                      <img id="tq-q3-img" data-src="holder.js/200x200" class="img-thumbnail" alt="200x200" style="width: 200px; height: 200px;" data-holder-rendered="true">
-                      <a href="#">软件工程</a>
-                    </div>
-                    <div class="col-sm-2">
-                      <img id="tq-q3-img" data-src="holder.js/200x200" class="img-thumbnail" alt="200x200" style="width: 200px; height: 200px;" data-holder-rendered="true">
-                      <a href="#">软件工程</a>
-                    </div>
-                    <div class="col-sm-2">
-                      <img id="tq-q3-img" data-src="holder.js/200x200" class="img-thumbnail" alt="200x200" style="width: 200px; height: 200px;" data-holder-rendered="true">
-                      <a href="#">软件工程</a>
-                    </div>
+                    <% end %>
                   </div>
                 </div>
                 <!-- Books collections goes here. -->
                 <div id="latest-cc" role="tabpanel" class="list-group tab-pane fade">
-                  <h3><a href="bookcollection.html"><button class="btn btn-default">查看全部</button></a></h3>
+                  <h3><a href="<%= bookcollection_path %>"><button class="btn btn-default">查看全部</button></a></h3>
                   <div class="row">
+                    <% number = 6 %>
+                    <% number = @user_book_relations.count if @user_book_relations.count < 6 %>
+                    <% for i in 0...number %>
+                        <% book = Book.find(@user_book_relations[i].book_id) %>
+                        <% if book.picture_id.nil? %>
+                            <% book.picture_id = 0 %>
+                        <% end %>
+                    <div class="col-sm-2">
+                      <a href="<%= bookdetail_path(book) %>"><img id="tq-q3-img" src="<%= url_for controller: :upload ,action: :picture, id: book.picture_id %>" data-src="holder.js/200x200" class="img-thumbnail" alt="200x200" style="width: 200px; height: 200px;" data-holder-rendered="true"></a>
+                        <a href="<%= bookdetail_path(book) %>"><%= book.title.strip %></a>
+                    </div>
+                    <% end %>
+                    <% for i in 0...(6-number) %>
                     <div class="col-sm-2">
                       <img id="tq-q3-img" data-src="holder.js/200x200" class="img-thumbnail" alt="200x200" style="width: 200px; height: 200px;" data-holder-rendered="true">
-                      <a href="#">软件工程</a>
+                      <a href="#">暂未收藏</a>
                     </div>
-                    <div class="col-sm-2">
-                      <img id="tq-q3-img" data-src="holder.js/200x200" class="img-thumbnail" alt="200x200" style="width: 200px; height: 200px;" data-holder-rendered="true">
-                      <a href="#">软件工程</a>
-                    </div>
-                    <div class="col-sm-2">
-                      <img id="tq-q3-img" data-src="holder.js/200x200" class="img-thumbnail" alt="200x200" style="width: 200px; height: 200px;" data-holder-rendered="true">
-                      <a href="#">软件工程</a>
-                    </div>
-                    <div class="col-sm-2">
-                      <img id="tq-q3-img" data-src="holder.js/200x200" class="img-thumbnail" alt="200x200" style="width: 200px; height: 200px;" data-holder-rendered="true">
-                      <a href="#">软件工程</a>
-                    </div>
-                    <div class="col-sm-2">
-                      <img id="tq-q3-img" data-src="holder.js/200x200" class="img-thumbnail" alt="200x200" style="width: 200px; height: 200px;" data-holder-rendered="true">
-                      <a href="#">软件工程</a>
-                    </div>
-                    <div class="col-sm-2">
-                      <img id="tq-q3-img" data-src="holder.js/200x200" class="img-thumbnail" alt="200x200" style="width: 200px; height: 200px;" data-holder-rendered="true">
-                      <a href="#">软件工程</a>
-                    </div>
+                    <% end %>
                   </div>
                 </div>
               </div>
@@ -162,11 +150,15 @@
                     <tr><td colspan="2">最近申请添加的课程</td></tr>
                   </thead>
                   <tbody>
-                    <tr><td>1</td><td>课程1</td></tr>
-                    <tr><td>2</td><td>课程2</td></tr>
-                    <tr><td>3</td><td>课程3</td></tr>
-                    <tr><td>4</td><td>课程4</td></tr>
-                    <tr><td>5</td><td>课程5</td></tr>
+                  <% number = 5 %>
+                  <% number = @course_contributions.count if @course_contributions.count < 5 %>
+                  <% for i in 0...number %>
+                      <% contributed_course = Course.find(@course_contributions[i].content_id) %>
+                    <tr><td><%= i + 1 %></td><td><a href="<%= coursedetail_path(contributed_course) %>"><%= contributed_course.title.strip %></a></td></tr>
+                  <% end %>
+                  <% for i in 0...(5-number) %>
+                    <tr><td></td><td>暂无</td></tr>
+                  <% end %>
                   </tbody>
                 </table>
               </div>
@@ -176,11 +168,15 @@
                     <tr><td colspan="2">最近申请添加的书籍</td></tr>
                   </thead>
                   <tbody>
-                    <tr><td>1</td><td>书籍1</td></tr>
-                    <tr><td>2</td><td>书籍2</td></tr>
-                    <tr><td>3</td><td>书籍3</td></tr>
-                    <tr><td>4</td><td>书籍4</td></tr>
-                    <tr><td>5</td><td>书籍5</td></tr>
+                  <% number = 5 %>
+                  <% number = @book_contributions.count if @book_contributions.count < 5 %>
+                  <% for i in 0...number %>
+                      <% contributed_book = Book.find(@book_contributions[i].content_id) %>
+                      <tr><td><%= i + 1 %></td><td><a href="<%= bookdetail_path(contributed_book) %>"><%= contributed_book.title.strip %></a></td></tr>
+                  <% end %>
+                  <% for i in 0...(5-number) %>
+                      <tr><td></td><td>暂无</td></tr>
+                  <% end %>
                   </tbody>
                 </table>
               </div>

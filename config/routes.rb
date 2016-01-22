@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get '/bookcollection' => 'index#bookcollection', as: :bookcollection
   get '/coursecollection' => 'index#coursecollection', as: :coursecollection
   get 'logout' => 'users#logout', as: :logout
+  get 'like_or_dislike_book/:book_id' => 'users#like_or_dislike_book', as: :like_or_dislike_book
+  get 'like_or_dislike_course/:course_id' => 'users#like_or_dislike_course', as: :like_or_dislike_course
   		
   ##########book##########
   get 'newbook' => 'books#newbook', as: :newbook

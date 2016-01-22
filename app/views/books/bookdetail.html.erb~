@@ -43,7 +43,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/logout">注销</a></li>
             <li><a href="<%= index_usercenter_path %>">用户中心</a></li>
-            <li><a href="/:user/:id/messages">消息<span class="badge">14</span></a></li>
+            <!-- <li><a href="/:user/:id/messages">消息<span class="badge">14</span></a></li> -->
           </ul>
           <form class="navbar-form navbar-left">
             <input type="text" id="searchInput" class="form-control" placeholder="搜索课程或者书籍...">
@@ -78,8 +78,9 @@
                 <thead>
                   <tr id="np">
                     <td colspan="2"><h1><%= @book.title %></h1></td>
-                    <td colspan="2"><a href="" ><button id="np-b" class="btn btn-lg course-default" ><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>收藏</button></a></td>
-                  </tr>
+                    
+                    <td colspan="2"><% unless @user.nil? %><a href="" ><% unless @user.nil? %><button id="np-b" class="btn btn-lg <% if @collected %>course-liked<% else %>course-default<% end %>"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>收藏</button></a><% end %></td>
+                        </tr>
                 </thead>
                 <tbody id="b-info">
                   <tr>
@@ -87,7 +88,7 @@
                       <% if @book.picture_id.nil? %>
                           <% @book.picture_id = 0 %>
                       <% end %>
-                      <img class="bd-thumb" data-src="holder.js/200x200" class="img-thumbnail" alt="course name" src="<%= url_for controller: :upload ,action: :picture, id: @book.picture_id %>" data-holder-rendered="true"></td>
+                      <img class="bd-thumb" data-src="holder.js/200x200" class="img-thumbnail" alt="book name" src="<%= url_for controller: :upload ,action: :picture, id: @book.picture_id %>" data-holder-rendered="true"></td>
                     <td class="bd-attr">著者:</td>
                     <td><%= @book.author %></td>
                   </tr>
@@ -107,13 +108,13 @@
                     <td class="bd-attr">难度:</td>
                     <td>
                       <span>
-                        <% for i in 0...(@book.difficulty / 2) %>
+                        <% for i in 0...(@book.difficulty) %>
                           <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                         <% end %>
-                        <% for i in 0...(5 - @book.difficulty/2) %>
+                        <% for i in 0...(5 - @book.difficulty) %>
                           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
                         <% end %>
-                        (<%= @book.difficulty %>/10)
+                        (<%= @book.difficulty %>/5)
                       </span>
                     </td>
                   </tr>
@@ -320,7 +321,8 @@
 
     <script type="text/javascript">
       $("#np-b").click(function(){
-          $("#np-b").toggleClass("course-default course-liked")
+          //$("#np-b").toggleClass("course-default course-liked")
+          self.location.href = '/like_or_dislike_book/' + <%= @book.id %>
           return false;
         });
         $(".plus1").click(function(){

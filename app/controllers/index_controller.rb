@@ -3,6 +3,8 @@ class IndexController < ApplicationController
     @lastest_books = Book.all.order('created_at desc')
     @pop_books = Book.all.order('clicks desc')
     @pop_courses = Course.all.order('clicks desc')
+    @lastest_comments = BookReview.last(3)
+    @display = false
     if session[:user_id].nil?
         return
     end
@@ -18,6 +20,9 @@ class IndexController < ApplicationController
     @pop_books = Book.all.order('clicks desc')
     @pop_courses = Course.all.order('clicks desc')
     @user = User.find(session[:user_id])
+    @lastest_comments = BookReview.last(3)
+    @display = false
+
   end
 
   def usercenter
@@ -26,6 +31,12 @@ class IndexController < ApplicationController
       return
     end
     @user = User.find(session[:user_id].to_i)
+    @user_course_relations = Usercourse.where('user_id = ?',session[:user_id]).order('updated_at desc')
+    @user_book_relations = Userbook.where('user_id = ?',session[:user_id]).order('updated_at desc')
+
+    @course_contributions = Contribution.where('content_type = 0 and user_id = ?',session[:user_id]).order('updated_at desc').limit(5)
+    @book_contributions = Contribution.where('content_type = 1 and user_id = ?',session[:user_id]).order('updated_at desc').limit(5)
+
   end
 
   def search

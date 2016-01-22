@@ -32,6 +32,15 @@ class CoursesController < ApplicationController
   end
   
   def coursedetail
+    @collected = false
+    if session[:user_id].nil?
+      @user = nil
+    else
+      @user = User.find(session[:user_id])
+      if Usercourse.where('user_id = ? and course_id = ?',session[:user_id],params[:id]).count > 0
+        @collected = true
+      end
+    end
     @course = Course.find(params[:id])
     #Add clicks
     #For view rendering
