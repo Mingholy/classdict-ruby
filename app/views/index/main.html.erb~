@@ -129,7 +129,11 @@ setTimeout("$('#sys-message').animate({opacity:'-=0.9'},5000,'swing')",5000);
           </tr>
           </thead>
           <tbody>
-          <% for i in 0..9 %>
+	  <% m = 9 %>
+	  <% if Book.all.count<10 %>
+	  <%  m = Book.all.count-1 %>
+	  <% end %>
+          <% for i in 0..m %>
           <tr>
             <td><%= i+1 %></td>
             <td><%= link_to '《'+ @pop_books[i].title + '》第' + @pop_books[i].version.to_i.to_s + '版 ('+ @pop_books[i].author.strip + ')' ,bookdetail_path(@pop_books[i]) %></td>
@@ -176,7 +180,11 @@ setTimeout("$('#sys-message').animate({opacity:'-=0.9'},5000,'swing')",5000);
           </tr>
           </thead>
           <tbody>
-          <% for i in 0..4 %>
+	  <% lm=4 %>
+	  <% if Book.all.count<5 %>
+	  <%  lm= Book.all.count-1 %>
+	  <% end %》
+          <% for i in 0..lm %>
           <tr>
             <td><%= i+1 %></td>
             <td><%= link_to @lastest_books[i].title,book_path(@lastest_books[i]) %></td>
@@ -307,17 +315,17 @@ setTimeout("$('#sys-message').animate({opacity:'-=0.9'},5000,'swing')",5000);
       <div class="modal-body">
        不得发表违法信息！包括但不限于：<br>
 	1.反对宪法所确定的基本原则的；<br>
-2.危害国家安全，泄露国家秘密，颠覆国家政权，破坏国家统一的；<br>
-3.损害国家荣誉和利益的；<br>
-4.煽动民族仇恨、民族歧视、破坏民族团结的；<br>
-5.破坏国家宗教政策，宣扬邪教和封建迷信的；<br>
-6.散布谣言，扰乱社会秩序，破坏社会稳定的；<br>
-7.散布淫秽、色情、赌博、暴力、凶杀、恐怖或者教唆犯罪的；<br>
-8.侮辱或者诽谤他人，侵害他人合法权利的；<br>
-9.煽动非法集会、结社、游行、示威、聚众扰乱社会秩序的；<br>
-10.以非法民间组织名义活动的；<br>
-11.含有虚假、有害、胁迫、侵害他人隐私、骚扰、侵害、中伤、粗俗、猥亵、或其它道德上令人反感的内容；<br>
-12.含有中国法律、法规、规章、条例以及任何具有法律效力之规范所限制或禁止的其它内容的。
+	2.危害国家安全，泄露国家秘密，颠覆国家政权，破坏国家统一的；<br>
+	3.损害国家荣誉和利益的；<br>
+	4.煽动民族仇恨、民族歧视、破坏民族团结的；<br>
+	5.破坏国家宗教政策，宣扬邪教和封建迷信的；<br>
+	6.散布谣言，扰乱社会秩序，破坏社会稳定的；<br>
+	7.散布淫秽、色情、赌博、暴力、凶杀、恐怖或者教唆犯罪的；<br>
+	8.侮辱或者诽谤他人，侵害他人合法权利的；<br>
+	9.煽动非法集会、结社、游行、示威、聚众扰乱社会秩序的；<br>
+	10.以非法民间组织名义活动的；<br>
+	11.含有虚假、有害、胁迫、侵害他人隐私、骚扰、侵害、中伤、粗俗、猥亵、或其它道德上令人反感的内容；<br>
+	12.含有中国法律、法规、规章、条例以及任何具有法律效力之规范所限制或禁止的其它内容的。
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>

@@ -7,38 +7,23 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Book.create!([
-{title: '数据挖掘',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
-{title: '软件工程',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
-{title: '操作系统',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
-{title: '通信原理',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
-{title: '人工智能',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
-{title: '数据库新技术',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'}
-{title: '数据挖掘',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
-{title: '软件工程',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
-{title: '操作系统',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
-{title: '通信原理',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
-{title: '人工智能',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
-{title: '数据库新技术',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'}
-{title: '数据挖掘',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
-{title: '软件工程',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
-{title: '操作系统',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
-{title: '通信原理',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
-{title: '人工智能',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'},
-{title: '数据库新技术',author: '123', publish_time: '2012-01-01', version:'ee', pro: 12, con: 23, difficulty: 2, clicks: 100, description: 'jdlkajfkljsldfj'}
+{title: '高级软件工程',author: '中国科学院大学', publish_time: '2012-01-01', version:'3', pro: 12, con: 23, difficulty: 2, clicks: 1, description: '软件工程是一门研究用工程化方法构建和维护有效的、实用的和高质量的软件的学科。它涉及程序设计语言、数据库、软件开发工具、系统平台、标准、设计模式等方面。'，picture_id:'20'}
 ])
 
 Course.create!([
-{title: '软件工程', school: 'ucas', time: '2015-01-01', description: 'adfasfasfasdf',clicks: 123},
-{title: '操作系统', school: 'ucas', time: '2015-01-01', description: 'adfasfasfasdf',clicks: 123},
-{title: '软件工程', school: 'ucas', time: '2015-01-01', description: 'adfasfasfasdf',clicks: 123},
-{title: '数据挖掘', school: 'ucas', time: '2015-01-01', description: 'adfasfasfasdf',clicks: 123},
-{title: 'pythn', school: 'ucas', time: '2015-01-01', description: 'adfasfasfasdf',clicks: 123},
-{title: '模式识别', school: 'ucas', time: '2015-01-01', description: 'adfasfasfasdf',clicks: 123},
-{title: '机器学习', school: 'ucas', time: '2015-01-01', description: 'adfasfasfasdf',clicks: 123},
-{title: '人工只能', school: 'ucas', time: '2015-01-01', description: 'adfasfasfasdf',clicks: 123},
-{title: '离散数学', school: 'ucas', time: '2015-01-01', description: 'adfasfasfasdf',clicks: 123},
-{title: '图论', school: 'ucas', time: '2015-01-01', description: 'adfasfasfasdf',clicks: 123},
-{title: '概率论', school: 'ucas', time: '2015-01-01', description: 'adfasfasfasdf',clicks: 123},
-{title: '线性代数', school: 'ucas', time: '2015-01-01', description: 'adfasfasfasdf',clicks: 123},
-{title: '数学分析', school: 'ucas', time: '2015-01-01', description: 'adfasfasfasdf',clicks: 123}
+{title: '高级软件工程', school: '中国科学院大学', time: '2015-09-07', description: '软件工程是一门研究用工程化方法构建和维护有效的、实用的和高质量的软件的学科。它涉及程序设计语言、数据库、软件开发工具、系统平台、标准、设计模式等方面。', clicks: 1, picture_id:'1'},
+{title: '数据挖掘', school: '中国科学院大学', time: '2015-09-07', description: '本课程为计算机软件学科研究生的专业普及课程。主要介绍数据挖掘技术的起源、原理、主要算法、关键技术等。课程包含的主要议题包括：数据挖掘的重要性、特点、应用领域、数据仓库、数据预处理技术、关联规则、分类、预测、聚类、顺序模式等。 本课程采用全英文教学，并将注重理论与实践相结合，使计算机专业研究生掌握数据挖掘的概念的同时，锻炼解决实际问题的能力，为将来的科研工作奠定基础。', clicks: 1, picture_id:'2'},
+{title: '数值分析', school: '中国科学院大学', time: '2015-09-07', description: '本课程为计算数学和应用数学专业硕士研究生的专业普及课，同时也可作为物理、力学、化学及工程科学等专业硕士研究生的选修课。本课程的主要内容包括：1. 基本概念；2. 线性方程组数值求解；3. 函数逼近；4．数值积分；5. 矩阵特征值数值计算；6.非线性方程数值求解；7.常微分方程数值解。 通过本课程的学习，希望学生掌握数值分析的基本内容和基本方法，能运用所学方法上机实算，为今后从事科学与工程计算打下基础。', clicks: 1, picture_id:'3'},
+{title: '模式识别', school: '中国科学院大学', time: '2015-09-07', description: '本课程为控制科学与工程学科研究生的核心课，讲授和讨论模式识别领域的核心基础理论与方法。主要内容有模式识别定义和基本思想、贝叶斯决策、多种分类器设计、神经网络和深度学习、核方法、聚类分析、特征提取与选择、决策树、概率图模型等。 通过本课程的学习，希望学生能了解模式识别基础理论和方法，了解模式识别和机器学习最新研究成果，掌握基本思想和关键技术，培养学生在模式识别及其应用领域的研究和技术开发能力。', clicks: 1, picture_id:'4'},
+{title: '矩阵分析与应用', school: '中国科学院大学', time: '2015-09-07', description: '本课程为控制科学与工程专业研究生的专业普及课。近代矩阵分析的范围很广，本课程主要内容为以矩阵为工具的处理大量有限空间形式与数量关系的方法学。包括：矩阵分析的基本理论，矩阵分解的基本技术和特殊矩阵的性质。 通过本课程的学习，希望学生能掌握利用矩阵解决问题的基本理论和基本技巧，对矩阵分析的近代发展有所了解，为利用矩阵分析的技术解决问题和从事专业研究打下基础。', clicks: 1, picture_id:'5'},
+{title: '线性代数', school: '中国科学院大学', time: '2015-09-07', description: '本课程是各专业本科生必修基础课。要求学生通过本门课程的学习，掌握线性代数的入门知识和方法，还有相关的代数基本知识。本课程分A（数理）, B（理工）两类。这两类的基本内容相同（见第三部分：教学内容和学时），但B类有更多的理论分析，A类则以严格的理论证明为基础。A类适合那些以后继续学习数学、物理、计算机等学科的学生，也适合继续学习其他学科的学生，B类适合以后学习数学以外任何专业的学生。通过本课程教学，学生应达到以下基本要求：掌握线性代数入门知识及相关的代数知识的基本概念和基本方法，初步了解和形成线性代数的思维方式，为学习线性代数II和其他课程打下基础。', clicks: 1, picture_id:'6'},
+{title: '应用概率论', school: '中国科学院大学', time: '2015-09-07', description: '本课程是为非数学学科硕士研究生开设的一门公共选修课。概率论是研究随机现象数量规律的一门数学分支。通过该课程向学生传输概率论的基本思想与运用概率论解决实际问题的基本技能。', clicks: 1, picture_id:'7'},
+{title: '微积分', school: '中国科学院大学', time: '2015-09-07', description: '本课程是许多后继课程如微分方程、微分几何、复变函数、实变函数、概率论、基础物理、理论力学等学习的基础。微积分同时也是大学数学的基本能力及思维方法的训练重要课程。具有良好的微积分的基础对于今后的学习和研究起着关键的作用。', clicks: 1, picture_id:'8'},
+{title: 'Python语言导论', school: '中国科学院大学', time: '2015-09-07', description: '本课程为各学科专业研究生的选修课。Python是出现较晚的一种程序设计语言，正逐渐发展为主流程序设计语言之一，目前在TIOBE编程语言排行榜中长期占据第八的位次。该语言简单、易学；免费、开源；可移植性好；支持面向对象；可扩展性好；支持可嵌入性；具有丰富的库。Python语言是少有的一种可以称得上既简单又功能强大的编程语言，使学习者不至于陷入复杂的语法，非常适合训练编程思维。Python语言是一种通用语言，可用于编写任何类型的程序，目前大量用于编写脚本程序、网站开发、文本处理、图像处理、科学计算及教育等方面。通过本课程的学习，要求达到：掌握Python语言的基本语法、具备阅读和理解程序的能力、掌握编程思维方法、能够结合科研实践编写一定难度的程序并获得进一步深入学习的能力。', clicks: 1, picture_id:'9'},
+{title: '网络数据挖掘', school: '中国科学院大学', time: '2015-09-07', description: '本课程是计算机科学专业研究生一年级上开设的专业普及课，其目的是使学生初步掌握数据挖掘的基本方法与在网络数据上的应用。本课程聚焦于数据挖掘基础理论及其在推荐系统、社交网络、互联网搜索、互联网广告中的应用及最新进展，授课与编程相结合，培养学生使用数据挖掘技术解决实际问题的能力，并逐步积累独立学习和研究的经验。', clicks: 1, picture_id:'10'},
+{title: '计算机体系结构', school: '中国科学院大学', time: '2015-09-07', description: '本课程为计算机科学与技术学科研究生的专业核心课。本课程重点论述计算机系统的各种基本结构、设计技术和性能分析方法。课程的目的及任务是：使学生通过本课程的学习，了解计算机系统的各种基本结构，掌握在计算机设计的各个环节中影响性能的因素，以及提高性能的各种理论和方法，并通过定量分析技术为设计的整体和局部的性能进行科学评价。', clicks: 1, picture_id:'11'}
+])
+
+User.create!([
+{email: 'admin@classdict.com', password:'123456', nickname:'Administrator', level:'100', score:'1000'}
 ])
