@@ -33,6 +33,8 @@ setTimeout("$('#sys-message').animate({opacity:'-=0.9'},5000,'swing')",5000);
           break;
         case 3:
           $("#register-panel").modal();
+        case 4:
+          $("#about-panel").modal();
       }
       $("body").css('padding-right','0px');
     }
@@ -70,7 +72,7 @@ setTimeout("$('#sys-message').animate({opacity:'-=0.9'},5000,'swing')",5000);
         <ul class="nav navbar-nav navbar-right link-effect">
           <li><a href="#" onclick="callModal(1)">Login</a></li>
           <li><a href="#" onclick="callModal(2)">Register</a></li>
-          <li><a href="#" data-toggle="modal" data-target="#about-panel">About</a></li>
+          <li><a href="#" onclick="callModal(4)>About</a></li>
         </ul>
       </div>
     </nav>
