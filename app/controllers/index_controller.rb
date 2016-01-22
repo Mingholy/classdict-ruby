@@ -3,7 +3,7 @@ class IndexController < ApplicationController
     @lastest_books = Book.all.order('created_at desc')
     @pop_books = Book.all.order('clicks desc')
     @pop_courses = Course.all.order('clicks desc')
-    @lastest_comments = BookReview.last(3).order('updated_at desc')
+    @lastest_comments = BookReview.order('updated_at desc').limit(3)
     @display = false
     if session[:user_id].nil?
         return
@@ -20,7 +20,7 @@ class IndexController < ApplicationController
     @pop_books = Book.all.order('clicks desc')
     @pop_courses = Course.all.order('clicks desc')
     @user = User.find(session[:user_id])
-    @lastest_comments = BookReview.last(3).order('updated_at desc')
+    @lastest_comments = BookReview.order('updated_at desc').limit(3)
     @display = false
 
   end
