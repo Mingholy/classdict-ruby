@@ -102,13 +102,13 @@
                             <% course.picture_id = 1 %>
                         <% end %>
                     <div class="col-sm-2">
-                      <a href="<%= coursedetail_path(course) %>"><img id="tq-q3-img" src="<%= url_for controller: :upload ,action: :picture, id: course.picture_id %>" data-src="holder.js/200x200" class="img-thumbnail" alt="200x200" style="width: 200px; height: 200px;" data-holder-rendered="true"></a>
+                      <a href="<%= coursedetail_path(course) %>"><img id="tq-q3-img" src="<%= url_for controller: :upload ,action: :picture, id: course.picture_id %>" data-src="holder.js/200x200" class="img-thumbnail" style="width: 200px; height: 140px;;" data-holder-rendered="true"></a>
                       <a href="<%= coursedetail_path(course) %>"><%= course.title.strip %></a>
                     </div>
                     <% end %>
                     <% for i in 0...(6-number) %>
                     <div class="col-sm-2">
-                      <img id="tq-q3-img" data-src="holder.js/200x200" class="img-thumbnail" alt="200x200" style="width: 200px; height: 200px;" data-holder-rendered="true">
+                      <img id="tq-q3-img" data-src="holder.js/200x200" class="img-thumbnail"  style="width: 200px; height: 140px;;" data-holder-rendered="true">
                       <a href="#">暂未收藏</a>
                     </div>
                     <% end %>
@@ -126,13 +126,13 @@
                             <% book.picture_id = 0 %>
                         <% end %>
                     <div class="col-sm-2">
-                      <a href="<%= bookdetail_path(book) %>"><img id="tq-q3-img" src="<%= url_for controller: :upload ,action: :picture, id: book.picture_id %>" data-src="holder.js/200x200" class="img-thumbnail" alt="200x200" style="width: 200px; height: 200px;" data-holder-rendered="true"></a>
+                      <a href="<%= bookdetail_path(book) %>"><img id="tq-q3-img" src="<%= url_for controller: :upload ,action: :picture, id: book.picture_id %>" data-src="holder.js/200x200" class="img-thumbnail"  style="width: 200px; height: 140px;;" data-holder-rendered="true"></a>
                         <a href="<%= bookdetail_path(book) %>"><%= book.title.strip %></a>
                     </div>
                     <% end %>
                     <% for i in 0...(6-number) %>
                     <div class="col-sm-2">
-                      <img id="tq-q3-img" data-src="holder.js/200x200" class="img-thumbnail" alt="200x200" style="width: 200px; height: 200px;" data-holder-rendered="true">
+                      <img id="tq-q3-img" data-src="holder.js/200x200" class="img-thumbnail"  style="width: 200px; height: 140px;;" data-holder-rendered="true">
                       <a href="#">暂未收藏</a>
                     </div>
                     <% end %>
