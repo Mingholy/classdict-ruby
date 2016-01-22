@@ -12,7 +12,6 @@ class IndexController < ApplicationController
   end
 
   def index_login
-    reset_session
     if session[:user_id].nil?
       redirect_to root_path
       return
