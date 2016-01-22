@@ -152,7 +152,7 @@ setTimeout("$('#sys-message').animate({opacity:'-=0.9'},5000,'swing')",5000);
             <% book = Book.find(@lastest_comments[i].book_id) %>
             <% user = User.find(@lastest_comments[i].user_id) %>
         <a href="<%= bookdetail_path(book) %>" class="list-group-item">
-          <h4 class="list-group-item-heading">用户<%= user.nickname.strip %>评价《<%= book.title.strip %>》:</h4>
+          <h4 class="list-group-item-heading">用户&nbsp<%= user.nickname.strip %>&nbsp评价&nbsp《<%= book.title.strip %>》:</h4>
           <p class="list-group-item-text"><%= @lastest_comments[i].content.strip %></p>
         </a>
         <% end %>
