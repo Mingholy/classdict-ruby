@@ -129,9 +129,9 @@ setTimeout("$('#sys-message').animate({opacity:'-=0.9'},5000,'swing')",5000);
           </tr>
           </thead>
           <tbody>
-	  <% m = 9 %>
+	  <% m = 10 %>
 	  <% if Book.all.count<10 %>
-	  <%  m = Book.all.count-1 %>
+	  <%  m = Book.all.count %>
 	  <% end %>
           <% for i in 0..m %>
           <tr>
@@ -253,7 +253,7 @@ setTimeout("$('#sys-message').animate({opacity:'-=0.9'},5000,'swing')",5000);
           <a href="http://tympanus.net/Development/CreativeLinkEffects/">Creative Link Effects</a>
         </div>
         <div class="col-lg-4  footer-links" style="text-align:left;">
-          <h4>友(guang)情(gao)链接</h4>
+          <h4>友情链接</h4>
           <a href="https://se2015notes.herokuapp.com">课程笔记</a><br>
           <a href="https://r201528015329005.herokuapp.com">Rotten Potatoes</a><br>
           <a href="http://www.baidu.com">Baidu</a><br>
@@ -290,7 +290,6 @@ setTimeout("$('#sys-message').animate({opacity:'-=0.9'},5000,'swing')",5000);
             <label>
               <input type="checkbox" value="remember-me">我下回来不想再输入了
             </label>
-            
           </div>
         </div>
         <div class="modal-footer">

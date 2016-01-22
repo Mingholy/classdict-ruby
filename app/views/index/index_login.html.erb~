@@ -56,7 +56,7 @@
 <body>
 <section class="title">
   <div class="container-fluid">
-<div id="sys-message" class="" style="position:fixed;z-index=40;width:100%;text-align:center;opacity:0.8;margin:0;background:#f2dede;z-index:40;text-size:24px;" role="alert"><%= flash[:notice] %></div>
+<div id="sys-message" class="" style="position:fixed;z-index:40;width:100%;text-align:center;opacity:0.8;margin:0;background:#f2dede;z-index:40;text-size:24px;" role="alert"><%= flash[:notice] %></div>
     <nav id="cd_navbar"class="navbar navbar-inverse">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-menu" aria-controls="navbar">
@@ -89,12 +89,9 @@
             <div class="input-group">
               <%= hidden_field_tag 'page',1 %>
               <%= text_field_tag 'keywords',nil, class: "form-control", placeholder:"搜索你感兴趣的课程或书籍...", onfocus:"focusBlur(1)", onblur:"focusBlur(0)"  %>
-										<span class="input-group-btn">
-                      <%= submit_tag 'Go',class:"btn btn-default",style:"color:blue"  do%>
-                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                      <% end %>
-
-										</span>
+		<span class="input-group-btn">
+                  <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </span>
             </div><!-- /input-group -->
           </div><!-- /.col-lg-6 -->
         </div><!-- /.row -->
@@ -117,7 +114,7 @@
           <% for i in 1..10 %>
           <tr>
             <td><%= i %></td>
-            <td><%= @pop_courses[i-1].title %></td>
+            <td><a href="<%= coursedetail_path(@pop_courses[i-1]) %>"><%= @pop_courses[i-1].title %></td>
           </tr>
           <% end %>
           </tbody>
@@ -131,29 +128,37 @@
           </tr>
           </thead>
           <tbody>
-          <% for i in 0..9 %>
+	  <% m = 9 %>
+	  <% if Book.all.count<10 %>
+	  <%  m = Book.all.count-1 %>
+	  <% end %>
+          <% for i in 0..m %>
           <tr>
             <td><%= i+1 %></td>
-            <td><%= link_to '《'+ @pop_books[i].title + '》第' + @pop_books[i].version.to_i.to_s + '版 ('+ @pop_books[i].author.strip + ')' ,book_path(@pop_books[i]) %></td>
+            <td><%= link_to '《'+ @pop_books[i].title + '》第' + @pop_books[i].version.to_i.to_s + '版 ('+ @pop_books[i].author.strip + ')' ,bookdetail_path(@pop_books[i]) %></td>
           </tr>
          <% end %>
           </tbody>
         </table>
       </div>
       <div class="col-lg-3 latest-comments">
-        <h4 class="ranking-title">最新评论</h4>
-        <a href="#" class="list-group-item">
-          <h4 class="list-group-item-heading">用户123在课程 数据挖掘 中说:</h4>
-          <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-        </a>
-        <a href="#" class="list-group-item">
-          <h4 class="list-group-item-heading">用户456在课程 人工智能 中说:</h4>
-          <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-        </a>
-        <a href="#" class="list-group-item">
-          <h4 class="list-group-item-heading">用户789在课程 算法设计与分析 中说:</h4>
-          <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-        </a>
+        <h4 class="ranking-title">最新书评</h4>
+        <% number = 3 %>
+        <% number = @lastest_comments.count if @lastest_comments.count < 3 %>
+        <% for i in 0...number  %>
+            <% book = Book.find(@lastest_comments[i].book_id) %>
+            <% user = User.find(@lastest_comments[i].user_id) %>
+            <a href="<%= bookdetail_path(book) %>" class="list-group-item">
+              <h4 class="list-group-item-heading">用户<%= user.nickname.strip %>评价《<%= book.title.strip %>》:</h4>
+              <p class="list-group-item-text"><%= @lastest_comments[i].content.strip %></p>
+            </a>
+        <% end %>
+        <% for i in 0...(3-number) %>
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">还没有评论</h4>
+              <p class="list-group-item-text">无内容</p>
+            </a>
+        <% end %>
       </div>
     </div>
     <hr>
@@ -174,7 +179,11 @@
           </tr>
           </thead>
           <tbody>
-          <% for i in 0..4 %>
+	  <% lm=4 %>
+	  <% if Book.all.count<5 %>
+	  <%  lm= Book.all.count-1 %>
+	  <% end %>
+          <% for i in 0..lm %>
           <tr>
             <td><%= i+1 %></td>
             <td><%= link_to @lastest_books[i].title,book_path(@lastest_books[i]) %></td>
@@ -191,6 +200,7 @@
     </div>
   </div>
 </section>
+<% if @display %>
 <section class="topquestions">
   <div class="progress">
     <div id="hr-bar" class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: 2%;" ><span class="sr-only">2% Complete</span></div>
@@ -229,6 +239,7 @@
     <hr>
   </div>
 </section>
+<% end %>
 <div id="footer-container" class="container-fluid">
   <div class="f-links">
     <div class="container">

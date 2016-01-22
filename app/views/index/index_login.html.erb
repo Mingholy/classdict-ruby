@@ -128,7 +128,11 @@
           </tr>
           </thead>
           <tbody>
-          <% for i in 0..9 %>
+	  <% m = 9 %>
+	  <% if Book.all.count<10 %>
+	  <%  m = Book.all.count-1 %>
+	  <% end %>
+          <% for i in 0..m %>
           <tr>
             <td><%= i+1 %></td>
             <td><%= link_to '《'+ @pop_books[i].title + '》第' + @pop_books[i].version.to_i.to_s + '版 ('+ @pop_books[i].author.strip + ')' ,bookdetail_path(@pop_books[i]) %></td>
@@ -175,7 +179,11 @@
           </tr>
           </thead>
           <tbody>
-          <% for i in 0..4 %>
+	  <% lm=4 %>
+	  <% if Book.all.count<5 %>
+	  <%  lm= Book.all.count-1 %>
+	  <% end %>
+          <% for i in 0..lm %>
           <tr>
             <td><%= i+1 %></td>
             <td><%= link_to @lastest_books[i].title,book_path(@lastest_books[i]) %></td>
@@ -244,7 +252,7 @@
           <a href="http://tympanus.net/Development/CreativeLinkEffects/">Creative Link Effects</a>
         </div>
         <div class="col-lg-4  footer-links" style="text-align:left;">
-          <h4>友(guang)情(gao)链接</h4>
+          <h4>友情链接</h4>
           <a href="https://se2015notes.herokuapp.com">课程笔记</a><br>
           <a href="https://r201528015329005.herokuapp.com">Rotten Potatoes</a><br>
           <a href="http://www.baidu.com">Baidu</a><br>
@@ -345,7 +353,5 @@
     </div>
   </div>
 </div>
-<!-- Placed at the end of the document so the pages load faster -->
-<%= javascript_include_tag 'bootstrap.min.js'%>
 </body>
 </html>
