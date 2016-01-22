@@ -50,6 +50,7 @@ class CoursesController < ApplicationController
   # POST /courses.json
   def create
     if session[:user_id].nil?
+      flash[:notice] = "请先登录!"
       redirect_to root_path
       return
     end
