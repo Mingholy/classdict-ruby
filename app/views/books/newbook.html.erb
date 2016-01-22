@@ -31,7 +31,7 @@
             <li><a href="<%= index_usercenter_path %>">用户中心</a></li>
             <!-- <li><a href="/:user/:id/messages">消息<span class="badge">14</span></a></li> -->
           </ul>
-          <form class="navbar-form navbar-left">
+          <form class="navbar-form navbar-left" onkeypress="if(event.keyCode==13)return false;">
             <input type="text" id="searchInput" class="form-control" placeholder="搜索课程或者书籍..." value="<%= params[:keywords] %>">
 						<div class="btn-group" role="group">
               <button type="button" class="btn btn-default" onclick="search_books()"><span class="glyphicon glyphicon-book" aria-hidden="true">书籍</span></button>

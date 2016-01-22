@@ -46,6 +46,11 @@ class BooksController < ApplicationController
 
   def write_review
     #Check for login
+    if session[:user_id].nil?
+      flash[:notice] = "请先登录!"
+      redirect_to root_path
+      return
+    end
     user_id = session[:user_id]
     book_id = params[:book_id]
     type = params[:post_type].to_s.strip
@@ -76,6 +81,11 @@ class BooksController < ApplicationController
 
   def write_note
     #Check for login
+    if session[:user_id].nil?
+      flash[:notice] = "请先登录!"
+      redirect_to root_path
+      return
+    end
     user_id = session[:user_id]
     book_id = params[:book_id]
     if user_id.nil?
@@ -103,6 +113,11 @@ class BooksController < ApplicationController
 
   def write_question
     #Check for login
+    if session[:user_id].nil?
+      flash[:notice] = "请先登录!"
+      redirect_to root_path
+      return
+    end
     user_id = session[:user_id]
     book_id = params[:book_id]
     if user_id.nil?
@@ -150,7 +165,8 @@ class BooksController < ApplicationController
 
   def post_reply_for_article
     if session[:user_id].nil?
-      redirect_to show_path sth:'session[:user_id].nil?'
+      flash[:notice] = "请先登录!"
+      redirect_to root_path
       return
     end
     if session[:book_id].nil?
