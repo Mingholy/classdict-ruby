@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Book.create!([
-{title: '高级软件工程',author: '中国科学院大学', publish_time: '2012-01-01', version:'3', pro: 12, con: 23, difficulty: 2, clicks: 1, description: '软件工程是一门研究用工程化方法构建和维护有效的、实用的和高质量的软件的学科。它涉及程序设计语言、数据库、软件开发工具、系统平台、标准、设计模式等方面。'，picture_id:'20'}
+{title: '高级软件工程',author: '中国科学院大学', publish_time: '2012-01-01', version:'3', pro: 12, con: 23, difficulty: 2, clicks: 1, description: '软件工程是一门研究用工程化方法构建和维护有效的、实用的和高质量的软件的学科。它涉及程序设计语言、数据库、软件开发工具、系统平台、标准、设计模式等方面。', picture_id:'20'}
 ])
 
 Course.create!([
