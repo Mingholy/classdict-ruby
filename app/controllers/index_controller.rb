@@ -90,7 +90,7 @@ class IndexController < ApplicationController
       return
     end
     if @page==0
-      @page++
+      @page = @page+1
     end
     @user_book_relations = Userbook.where(user_id: session[:user_id].to_i).order('created_at desc').offset((@page - 1) * 5).limit(5)
   end
