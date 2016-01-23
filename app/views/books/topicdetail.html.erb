@@ -9,6 +9,23 @@
     <!-- Class Dict Customize-->
     <%= stylesheet_link_tag 'usermain.css' %>
     <%= stylesheet_link_tag 'topicdetail.css' %>
+    <%= javascript_tag do %>
+
+        function search_books(){
+        var keywords = document.getElementById("searchInput").value;
+        if (keywords == "" || keywords.length == 0)
+        keywords = '*';
+        self.location.href = '/search/'+keywords + '/1';
+        }
+        function search_courses(){
+        var keywords = document.getElementById("searchInput").value;
+        if (keywords == "" || keywords.length == 0)
+        keywords = '*';
+        self.location.href = '/search_course/'+keywords + '/1';
+        }
+
+
+    <% end %>
   </head>
   <body>
 		<!-- Topside navigation bar goes here-->
@@ -21,15 +38,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.html">Class Dict 课堂推书</a>
+          <a class="navbar-brand" href="<%= root_path %>">Class Dict 课堂推书</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/logout">注销</a></li>
-            <li><a href="<%= index_usercenter_path %>">用户中心</a></li>
-            <!-- <li><a href="/:user/:id/messages">消息<span class="badge">14</span></a></li> -->
+            <li><a href="/:user/:id/profile">设置</a></li>
+            <li><a href="/:user/:id/messages">消息<span class="badge">14</span></a></li>
           </ul>
-          <form class="navbar-form navbar-left" onkeypress="if(event.keyCode==13)return false;">
+          <form class="navbar-form navbar-left">
             <input type="text" id="searchInput" class="form-control" placeholder="搜索课程或者书籍...">
 						<div class="btn-group" role="group">
               <button type="button" class="btn btn-default" onclick="search_books()"><span class="glyphicon glyphicon-book" aria-hidden="true">&nbsp书籍</span></button>
@@ -52,23 +69,16 @@
         </ul>
 			</div>
 			<!-- Middle columns : search results; course details; book details -->
+      <% floor_num = 1 %>
 			<div class="col-sm-9 col-md-10 main col-sm-offset-3 col-md-offset-2 main">
 				<div class="container">
           <!-- Topic content goes here. -->
           <ul class="topic-content list-group">
-            <li class="list-group-item content-single" postid="0">  
-              <h4 class="list-group-item-heading topic-title">有保留地推荐</h4>
-              <h5 class="list-group-item-heading reply-at">enote &nbsp 2016-01-01 19:55:55</h5>
+            <li class="list-group-item content-single" postid="<%= floor_num %>" topicid="<%= params[:note_id] %>">
+              <h4 class="list-group-item-heading topic-title"><%= @topic.title.strip %></h4>
+              <h5 class="list-group-item-heading reply-at"><%= @topic_owner.nickname %> &nbsp 2016-01-01 19:55:55</h5>
               <p class="list-group-item-text reply-content">
-                我对《算法导论CLRS》的态度一直是有所保留的。虽然早在国内的时候，这本书一直被推崇为经典。但我那时就觉得它对算法的描述不好。一段费解的伪码，加上一大段费口舌的解释。我觉得本可以做得更好。
-
-                    后来知道，这是典型的美国本科生用书，美国的本科教材，大抵很罗嗦，都是厚重的大部头书。教授们生怕稍有简略，学生们就不懂；而美国的小本们，也傻呵呵的认为书头越重，自己越了不起。
-
-                    这书中的大段解释，也确是一番好意，就怕哪个不懂。可要真是老老实实的读下去，分散注意要超过传达信息。
-
-                    这本书我读的最快乐的部分，就是每章的chapter notes。也就是在一章的末尾，介绍这一章提到的各种内容是何时、被谁、怎样引入计算机科学的。不看这部分，总觉得学的就是书上的死学问。而这些引用出处却为我们理清了算法研究的历史脉络，各个经典结果的师承关系。读这些为我带来了巨大的乐趣。也建议读此书的人千万不要放过这一部分，这些引用的结果就是算法研究的里程碑。
-                    对于算法的伪码描述，倒不必太仔细了。不能指望在算法课上学习编程，算法本来就是很纯粹的数学对象，它的设计思想完全依托于背后的数学结构，它运作的机制以及它的美，也都来自它的数学，可是书上那些模仿C和Pascal的语句，让算法的数学之美沦为一段机械代码。读者辛苦的把自己的思维变成机器，读懂了这些代码，但并不会直接带来对算法本身的领悟。就像一个人懂得了打牌的游戏规则，但并不意味着他就会打牌了，因为他可能依旧不通晓牌理。对算法的学习也要从问题本身的数学结构入手，理解解决此种结构问题的算法它的设计思想，掌握分析具有各种结构特征的算法的数学工具，学习怎样发现问题的结构并从中推出问题的下界（lower bound）。这些才是学习算法的根本。
-                    算法导论》的最大成就，也就在于它的选材。它筛选出来的结果，每一个都当之无愧的算是计算机科学的根基或里程碑。在所有的算法教材中，这一点《算法导论》被公认是作的最好的。结构也组织的合理。尽管它的讲解，对这些经典结果的呈现，都不是我最满意的方式。但明珠纵然暗投也终究是明珠，《算法导论》覆盖的内容，可作为算法最好的教学大纲，是算法课的原型。这是它不容抹煞的历史地位。
+                <%= @topic.content.strip %>
               </p>
               <h5 class="list-group-item-heading reply-footer">
                 <span class="reply-buttons">
@@ -81,13 +91,17 @@
                 </span>
               </h5>
             </li>
-            <li class="list-group-item reply-single" postid="1">  
-              <h4 class="list-group-item-heading reply-title">赞赞赞!这是一个带标题的回复.</h4>
-              <h5 class="list-group-item-heading reply-at">hahaha &nbsp 2016-01-01 20:55:55</h5>
-              <p class="list-group-item-text reply-content">
-                楼主说得好!!!!!
-              </p>
-              <h5 class="list-group-item-heading reply-footer">
+            <% @reply_relation.each do |reply_relation| %>
+                <% reply_topic = BookNote.find(reply_relation.reply_id) %>
+                <% floor_num += 1 %>
+                <% if reply_topic.title.nil? %>
+                    <li class="list-group-item reply-single" postid="<%= floor_num %>" topicid="<%= reply_topic.id %>">
+                      <h4 class="list-group-item-heading reply-title"></h4>
+                      <h5 class="list-group-item-heading reply-at"><%= User.find(reply_topic.user_id).nickname %> &nbsp 2016-01-01 20:55:55</h5>
+                      <p class="list-group-item-text reply-content">
+                        <%= reply_topic.content.strip %>
+                      </p>
+                      <h5 class="list-group-item-heading reply-footer">
                 <span class="reply-buttons">
                   <span class="reply-b"><span class="glyphicon glyphicon-comment" aria-hidden="true">发表回复</span></span>
                   <span class="reply-this"><span class="glyphicon glyphicon-retweet" aria-hidden="true">回复此楼</span></span>
@@ -96,25 +110,28 @@
                   <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
                   <span class="badge">20</span>
                 </span>
-              </h5>
-            </li>
-            <li class="list-group-item reply-single" postid="2">  
-              <h4 class="list-group-item-heading reply-title"></h4>
-              <h5 class="list-group-item-heading reply-at">hahaha &nbsp 2016-01-01 20:55:55</h5>
-              <p class="list-group-item-text reply-content">
-                楼主说得好!!!!!这是一个不带标题的回复.
-              </p>
-              <h5 class="list-group-item-heading reply-footer">
-                <span class="reply-buttons">
-                  <span class="reply-b"><span class="glyphicon glyphicon-comment" aria-hidden="true">发表回复</span></span>
-                  <span class="reply-this"><span class="glyphicon glyphicon-retweet" aria-hidden="true">回复此楼</span></span>
-                  <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                  <span class="badge">42</span>&nbsp
-                  <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-                  <span class="badge">20</span>
-                </span>
-              </h5>
-            </li>
+                      </h5>
+                    </li>
+                <% else %>
+                  <li class="list-group-item reply-single" postid="<%= floor_num %>" topicid="<%= reply_topic.id %>">
+                    <h4 class="list-group-item-heading reply-title"><%= reply_topic.title %></h4>
+                    <h5 class="list-group-item-heading reply-at"><%= User.find(reply_topic.user_id).nickname %> &nbsp 2016-01-01 20:55:55</h5>
+                    <p class="list-group-item-text reply-content">
+                      <%= reply_topic.content.strip %>
+                    </p>
+                    <h5 class="list-group-item-heading reply-footer">
+                      <span class="reply-buttons">
+                        <span class="reply-b"><span class="glyphicon glyphicon-comment" aria-hidden="true">发表回复</span></span>
+                        <span class="reply-this"><span class="glyphicon glyphicon-retweet" aria-hidden="true">回复此楼</span></span>
+                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                        <span class="badge">42</span>&nbsp
+                        <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                        <span class="badge">20</span>
+                      </span>
+                    </h5>
+                  </li>
+                <% end %>
+              <% end %>
           </ul>
           <div class="page-control">
             <nav>
@@ -135,12 +152,13 @@
               <h3 class="panel-title">快速回复</h3>
             </div>
             <div class="panel-body">
-              <form name="reply">
-                <input id="reply-to-title"type="text" class="form-control" placeholder="回复标题">
-                <textarea class="form-control" rows="5" placeholder="回复内容"></textarea>
-                <input id="reply-to-id" type="text" class="form-control" style="display:none">
-                <button type="button" class="btn btn-primary btn-lg btn-block">回复</button>
-              </form>
+              <%=form_tag '/post_reply_for_article' do -%>
+                <input id="reply-to-title" name="title" type="text" class="form-control" placeholder="回复标题">
+                <textarea class="form-control" rows="5" name="content" placeholder="回复内容"></textarea>
+                <input id="reply-to-id" name="floor" type="text" class="form-control" style="display:none" >
+                <input id="reply_topic_id" name="reply_topic_id" type="text" class="form-control" style="display:none" >
+                <button type="submit" class="btn btn-primary btn-lg btn-block">回复</button>
+              <% end -%>
             </div>
           </div>
 				</div>
@@ -148,19 +166,11 @@
     </div>
 		<!-- Right sidebar : ranking lists -->
     </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <%= javascript_include_tag "bootstrap.min.js" %>
     <script type="text/javascript">
-      function search_books(){
-        var keywords = document.getElementById("searchInput").value;
-        if (keywords == "" || keywords.length == 0)
-        keywords = '*';
-        self.location.href = '/search/'+keywords + '/1';
-        }
-        function search_courses(){
-        var keywords = document.getElementById("searchInput").value;
-        if (keywords == "" || keywords.length == 0)
-        keywords = '*';
-        self.location.href = '/search_course/'+keywords + '/1';
-        }
       $(document).ready(function(){
         $(".reply-b").click(function(){
           var postid = $(".content-single").attr("postid");
@@ -169,12 +179,14 @@
         });
         $(".reply-this").click(function(){
           var postid = $(this).parent().parent().parent().attr("postid");
+          var topicid = $(this).parent().parent().parent().attr("topicid");
           //postid shouldn't appear here. Just temporarily.
           $("#reply-to-title").val("回复"+postid+"楼：")
           $("#reply-to-id").val(postid);
+          $("#reply_topic_id").val(topicid);
           $("html,body").animate({scrollTop:$(".reply-panel").offset().top}, 200);
         });
       });
     </script>
   </body>
-</html>
+</ht.l>

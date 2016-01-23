@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160113233042) do
+ActiveRecord::Schema.define(version: 20160115070729) do
 
   create_table "book_notes", force: :cascade do |t|
     t.string   "title"
@@ -111,6 +111,13 @@ ActiveRecord::Schema.define(version: 20160113233042) do
     t.datetime "updated_at",   null: false
   end
 
+  create_table "topic_relations", force: :cascade do |t|
+    t.integer  "topic_id"
+    t.integer  "reply_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "userbooks", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "book_id"
@@ -136,8 +143,9 @@ ActiveRecord::Schema.define(version: 20160113233042) do
     t.integer  "user_id"
     t.string   "publisher"
     t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "publisher_id"
   end
 
   add_index "userinfos", ["user_id"], name: "index_userinfos_on_user_id"

@@ -3,7 +3,7 @@ class IndexController < ApplicationController
     @lastest_books = Book.all.order('created_at desc')
     @pop_books = Book.all.order('clicks desc')
     @pop_courses = Course.all.order('clicks desc')
-    @lastest_comments = BookReview.last(3)
+    @lastest_comments = BookReview.order('updated_at desc').limit(3)
     @display = false
     if session[:user_id].nil?
         return
@@ -12,6 +12,7 @@ class IndexController < ApplicationController
   end
 
   def index_login
+
     if session[:user_id].nil?
       redirect_to root_path
       return
@@ -20,7 +21,7 @@ class IndexController < ApplicationController
     @pop_books = Book.all.order('clicks desc')
     @pop_courses = Course.all.order('clicks desc')
     @user = User.find(session[:user_id])
-    @lastest_comments = BookReview.last(3)
+    @lastest_comments = BookReview.order('updated_at desc').limit(3)
     @display = false
 
   end
@@ -111,6 +112,9 @@ class IndexController < ApplicationController
     if @page_count == 0
       @no_record = true
       return
+    end
+    if @page==0
+      @page = @page+1
     end
     @user_course_relations = Usercourse.where(user_id: session[:user_id].to_i).order('created_at desc').offset((@page - 1) * 5).limit(5)
   end
