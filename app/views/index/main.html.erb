@@ -191,7 +191,7 @@ setTimeout("$('#sys-message').animate({opacity:'-=0.9'},5000,'swing')",5000);
           <% for i in 0..lm %>
           <tr>
             <td><%= i+1 %></td>
-            <td><%= link_to @lastest_books[i].title,book_path(@lastest_books[i]) %></td>
+            <td><a href="/books/detail/<%= @lastest_books[i].id%>"><%=@lastest_books[i].title %></td>
             <td><%= link_to '第' + @lastest_books[i].version.to_i.to_s + '版' %></td>
             <td><%= @lastest_books[i].author %></td>
             <td><%= @lastest_books[i].clicks %></td>
